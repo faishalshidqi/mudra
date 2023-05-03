@@ -4,12 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "node-pg-migrate -f config/database/default.json",
+    "migrate:test": "node-pg-migrate -f config/database/test.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^21.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "jest": "^29.5.0",
+    "mockdate": "^3.0.5",
+    "node-pg-migrate": "^6.2.2",
+    "nodemon": "^2.0.22"
   }
 }

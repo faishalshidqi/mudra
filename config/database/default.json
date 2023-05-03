@@ -1,0 +1,8 @@
+{
+    "user": "developer",
+    "password": "supersecretpassword",
+    "host": "localhost",
+    "port": 5432,
+    "database": "capstone"
+  }
+  
