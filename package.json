@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --fix",
+    "start-dev": "nodemon src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +17,12 @@
     "@google-cloud/run": "^0.4.2",
     "@google-cloud/storage": "^6.10.0",
     "@hapi/hapi": "^21.3.2",
+    "dotenv": "^16.0.3",
+    "node-pg-migrate": "^6.2.2",
     "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "nodemon": "^2.0.22"
   }
 }
