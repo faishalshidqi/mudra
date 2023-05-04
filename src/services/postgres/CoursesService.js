@@ -10,7 +10,6 @@ class CoursesService {
 			text: 'select * from courses'
 		}
 		const result = await this._pool.query(query)
-		console.log(result)
 		return result
 	}
 
@@ -20,7 +19,7 @@ class CoursesService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
-		return result[0]
+		return result
 	}
 }
 

@@ -23,11 +23,11 @@ class CoursesHandler {
 		try {
 			const {id} = request.params
 			const data = await this._service.getCourseById(id)
-			//const course = data.rows
+			const course = data.rows
 			return {
 				status: 'success',
 				data: {
-					data
+					course
 				}
 			}
 		} catch (error) {
