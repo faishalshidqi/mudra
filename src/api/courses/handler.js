@@ -1,17 +1,18 @@
-const ClientError = require('../ClientError')
+const ClientError = require('../../exceptions/ClientError')
 
 
 class CoursesHandler {
-	constructor(service, validator) {
+	constructor(service, /*validator*/) {
 		this._service = service
-		this._validator = validator
+		//this._validator = validator
 
 		this.getCoursesHandler = this.getCoursesHandler.bind(this)
 		this.getCourseByIdHandler = this.getCourseByIdHandler.bind(this)
 	}
 
 	async getCoursesHandler() {
-		const courses = await this._service.getCourses()
+		const data = await this._service.getCourses()
+		const courses = data.rows
 		return {
 			status: 'success',
 			data: courses
@@ -21,11 +22,12 @@ class CoursesHandler {
 	async getCourseByIdHandler(request, h) {
 		try {
 			const {id} = request.params
-			const course = await this._service.getCourseById(id)
+			const data = await this._service.getCourseById(id)
+			//const course = data.rows
 			return {
 				status: 'success',
 				data: {
-					course
+					data
 				}
 			}
 		} catch (error) {
@@ -42,10 +44,11 @@ class CoursesHandler {
 			const response = h.response(
 				{
 					status: 'error',
-					message: 'Sorry for the inconvenience, our server is having an error.'
+					//message: 'Sorry for the inconvenience, our server is having an error.'
+					message: error.message
 				}
 			)
-			response.statusCode(500)
+			response.code(500)
 			return response
 		}
 	}

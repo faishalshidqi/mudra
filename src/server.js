@@ -4,13 +4,13 @@ const Hapi = require('@hapi/hapi')
 //const routes = require('src/api/courses/routes')
 const courses = require('./api/courses/index')
 
-const CoursesService = require('./api/services/postgres/CoursesService')
+const CoursesService = require('./services/postgres/CoursesService')
 
 const init = async () => {
 	const coursesService = new CoursesService()
 
 	const server = Hapi.server({
-		port: 8080,
+		port: process.env.PORT,
 		host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
 		routes : {
 			cors: {
