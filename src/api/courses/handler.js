@@ -5,9 +5,6 @@ class CoursesHandler {
 	constructor(service, /*validator*/) {
 		this._service = service
 		//this._validator = validator
-
-		this.getCoursesHandler = this.getCoursesHandler.bind(this)
-		this.getCourseByIdHandler = this.getCourseByIdHandler.bind(this)
 	}
 
 	async getCoursesHandler() {
@@ -23,11 +20,11 @@ class CoursesHandler {
 		try {
 			const {id} = request.params
 			const data = await this._service.getCourseById(id)
-			//const course = data.rows
+			const course = data.rows
 			return {
 				status: 'success',
 				data: {
-					data
+					course
 				}
 			}
 		} catch (error) {
