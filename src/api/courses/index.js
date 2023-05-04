@@ -1,4 +1,4 @@
-const {CoursesHandler} = require('./handler')
+const CoursesHandler = require('./handler')
 const routes = require('./routes')
 
 module.exports = {

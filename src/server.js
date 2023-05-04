@@ -1,10 +1,10 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-const routes = require('src/api/courses/routes')
+//const routes = require('src/api/courses/routes')
 const courses = require('./api/courses/index')
 
-const CoursesService = require('src/api/services/postgres/CoursesService')
+const CoursesService = require('./api/services/postgres/CoursesService')
 
 const init = async () => {
 	const coursesService = new CoursesService()
@@ -14,14 +14,10 @@ const init = async () => {
 		host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
 		routes : {
 			cors: {
-				origin: {
-					origin: ['*']
-				}
+				origin: ['*']
 			}
 		}
 	})
-
-	server.route(routes)
 
 	await server.register({
 		plugin: courses,
