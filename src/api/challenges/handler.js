@@ -19,6 +19,13 @@ class ChallengesHandler {
 
     const challange = await this._service.getChallengeById(id)
 
+    if (!challange) {
+      const response = h.response({
+        status: 'error',
+        message: 'Challenge Not Found'
+      })
+      response.code(404)
+    }
     const response = h.response({
       status: 'success',
       data: {
