@@ -1,3 +1,7 @@
 node_modules
 .env
 .prod.env
+coverage
+_test/
+*test.js
+test/
