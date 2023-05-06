@@ -6,7 +6,7 @@ class ChallengesService {
   }
 
   async getChallenges() {
-    const query = 'SELECT * FROM challenges'
+    const query = 'SELECT * FROM challenges WHERE is_delete = false'
 
     const result = await this._pool.query(query)
     
