@@ -1,4 +1,6 @@
 const { Pool } = require('pg')
+const NotFoundError = require('../../exceptions/NotFoundError')
+const { mapDBToModelChallenges } = require('../../utils/mapDBToModel')
 
 class ChallengesService {
   constructor() {
@@ -9,8 +11,12 @@ class ChallengesService {
     const query = 'SELECT * FROM challenges WHERE is_delete = false'
 
     const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Challenges tidak ditemukan')
+    }
     
-    return result.rows
+    return result.rows.map(mapDBToModelChallenges)
   }
 
   async getChallengeById(id) {
@@ -21,7 +27,11 @@ class ChallengesService {
 
     const result = await this._pool.query(query)
 
-    return result.rows[0]
+    if (!result.rowCount) {
+      throw new NotFoundError('Challenge tidak ditemukan')
+    }
+
+    return result.rows.map(mapDBToModelChallenges)[0]
   }
 }
 

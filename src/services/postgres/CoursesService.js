@@ -1,6 +1,6 @@
 const {Pool} = require('pg')
-const {nanoid} = require("nanoid");
-const InvariantError = require("../../exceptions/InvariantError");
+const NotFoundError = require('../../exceptions/NotFoundError')
+const { mapDBToModelCourses } = require('../../utils/mapDBToModel')
 
 class CoursesService {
   constructor() {
@@ -12,7 +12,11 @@ class CoursesService {
       text: 'select * from courses'
     }
     const result = await this._pool.query(query)
-    return result
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Courses tidak ditemukan')
+    }
+    return result.rows.map(mapDBToModelCourses)
   }
 
   async getCourseById(id) {
@@ -21,7 +25,11 @@ class CoursesService {
       values: [id]
     }
     const result = await this._pool.query(query)
-    return result
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Course tidak ditemukan')
+    }
+    return result.rows.map(mapDBToModelCourses)[0]
   }
 }
 
