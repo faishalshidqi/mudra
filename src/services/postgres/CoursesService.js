@@ -1,6 +1,5 @@
 const {Pool} = require('pg')
-const {nanoid} = require("nanoid");
-const InvariantError = require("../../exceptions/InvariantError");
+const NotFoundError = require('../../exceptions/NotFoundError')
 
 class CoursesService {
   constructor() {
@@ -12,6 +11,10 @@ class CoursesService {
       text: 'select * from courses'
     }
     const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Courses tidak ditemukan')
+    }
     return result
   }
 
@@ -21,6 +24,10 @@ class CoursesService {
       values: [id]
     }
     const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Course tidak ditemukan')
+    }
     return result
   }
 }

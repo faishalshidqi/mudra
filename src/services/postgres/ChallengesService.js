@@ -1,4 +1,5 @@
 const { Pool } = require('pg')
+const NotFoundError = require('../../exceptions/NotFoundError')
 
 class ChallengesService {
   constructor() {
@@ -9,6 +10,10 @@ class ChallengesService {
     const query = 'SELECT * FROM challenges WHERE is_delete = false'
 
     const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Challenges tidak ditemukan')
+    }
     
     return result.rows
   }
@@ -20,6 +25,10 @@ class ChallengesService {
     }
 
     const result = await this._pool.query(query)
+
+    if (!result.rowCount) {
+      throw new NotFoundError('Challenge tidak ditemukan')
+    }
 
     return result.rows[0]
   }
