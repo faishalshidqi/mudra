@@ -24,12 +24,6 @@ const init = async () => {
 				service: coursesService
 			}
 		},
-		{
-			plugin: uploads,
-			options: {
-				service: storageService
-			}
-		}
 	])
 
 	await server.start()
