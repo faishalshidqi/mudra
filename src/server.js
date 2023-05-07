@@ -1,16 +1,11 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-const Inert = require('@hapi/inert')
 const courses = require('./api/courses/index')
 const CoursesService = require('./services/postgres/CoursesService')
 
-const uploads = require('./api/uploads')
-const StorageService = require('./services/gcp/StorageService')
-
 const init = async () => {
 	const coursesService = new CoursesService()
-	const storageService = new StorageService()
 
 	const server = Hapi.server({
 		port: process.env.PORT,
