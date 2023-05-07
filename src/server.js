@@ -1,9 +1,7 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-//const routes = require('src/api/courses/routes')
 const courses = require('./api/courses/index')
-
 const CoursesService = require('./services/postgres/CoursesService')
 const challenges = require('./api/challenges')
 const ChallengesService = require('./services/postgres/ChallengesService')

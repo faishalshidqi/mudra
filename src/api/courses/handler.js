@@ -6,7 +6,6 @@ class CoursesHandler {
     this._service = service
     //this._validator = validator
   }
-
   async getCoursesHandler() {
     const data = await this._service.getCourses()
     const courses = data.rows
