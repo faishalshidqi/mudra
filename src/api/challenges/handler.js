@@ -14,7 +14,7 @@ class ChallengesHandler {
     }
   }
 
-  async getChallengeById(request, h) {
+  async getChallengeByIdHandler(request, h) {
     const { id } = request.params
 
     const challange = await this._service.getChallengeById(id)
