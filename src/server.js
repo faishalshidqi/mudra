@@ -1,9 +1,7 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-//const routes = require('src/api/courses/routes')
 const courses = require('./api/courses/index')
-
 const CoursesService = require('./services/postgres/CoursesService')
 
 const init = async () => {
@@ -19,12 +17,14 @@ const init = async () => {
 		}
 	})
 
-	await server.register({
-		plugin: courses,
-		options: {
-			service: coursesService
-		}
-	})
+	await server.register([
+		{
+			plugin: courses,
+			options: {
+				service: coursesService
+			}
+		},
+	])
 
 	await server.start()
 	console.log(`Server's running on ${server.info.uri}`)

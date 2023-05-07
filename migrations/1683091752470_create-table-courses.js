@@ -20,6 +20,10 @@ exports.up = pgm => {
             type: 'text',
             notNull: true
         },
+        type: {
+            type: 'text',
+            notNull: true
+        },
         created_at: {
             type: 'text',
             notNull: true
@@ -27,6 +31,9 @@ exports.up = pgm => {
         updated_at: {
             type: 'text',
             notNull: true
+        },
+        is_deleted: {
+            type: 'boolean'
         }
     })
 };
