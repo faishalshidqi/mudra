@@ -1,5 +1,6 @@
 const { Pool } = require('pg')
 const NotFoundError = require('../../exceptions/NotFoundError')
+const { mapDBToModelChallenges } = require('../../utils/mapDBToModel')
 
 class ChallengesService {
   constructor() {
@@ -15,7 +16,7 @@ class ChallengesService {
       throw new NotFoundError('Challenges tidak ditemukan')
     }
     
-    return result.rows
+    return result.rows.map(mapDBToModelChallenges)
   }
 
   async getChallengeById(id) {
@@ -30,7 +31,7 @@ class ChallengesService {
       throw new NotFoundError('Challenge tidak ditemukan')
     }
 
-    return result.rows[0]
+    return result.rows.map(mapDBToModelChallenges)[0]
   }
 }
 

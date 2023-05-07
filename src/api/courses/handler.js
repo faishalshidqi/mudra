@@ -4,8 +4,7 @@ class CoursesHandler {
     //this._validator = validator
   }
   async getCoursesHandler() {
-    const data = await this._service.getCourses()
-    const courses = data.rows
+    const courses = await this._service.getCourses()
     return {
       status: 'success',
       data: courses
@@ -14,8 +13,7 @@ class CoursesHandler {
 
   async getCourseByIdHandler(request) {
     const {id} = request.params
-    const data = await this._service.getCourseById(id)
-    const course = data.rows
+    const course = await this._service.getCourseById(id)
     return {
       status: 'success',
       data: {
