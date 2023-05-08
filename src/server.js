@@ -17,6 +17,7 @@ const ManagersService = require('./services/postgres/ManagersService')
 const init = async () => {
   const coursesService = new CoursesService()
   const challengesService = new ChallengesService()
+  const managersService = new ManagersService()
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -34,6 +35,12 @@ const init = async () => {
       options: {
         service: coursesService
       },
+    },
+    {
+      plugin: managers,
+      options: {
+        service: managersService
+      }
     },
     {
       plugin: challenges,
