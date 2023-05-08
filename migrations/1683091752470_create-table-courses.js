@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-exports.shorthands = undefined;
+exports.shorthands = undefined
 
 exports.up = pgm => {
     pgm.createTable('courses', {
@@ -39,5 +39,5 @@ exports.up = pgm => {
 };
 
 exports.down = pgm => {
-    pgm.dropTable('courses')
-};
+  pgm.dropTable('courses')
+}
