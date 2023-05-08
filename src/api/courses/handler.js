@@ -7,13 +7,6 @@ class CoursesHandler {
 		//this._validator = validator
 	}
 
-	/*async postCourseHandler(request, h){
-		try {
-			const {title, sign_pict_link, description, type} = request.payload
-
-		}
-	}*/
-
 	async getCoursesHandler() {
 		const data = await this._service.getCourses()
 		const courses = data.rows

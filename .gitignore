@@ -2,4 +2,3 @@ node_modules
 .env
 .prod.env
 mudra-dev-385811-bc3283cd8434.json
-/src/services/gcp/img/
