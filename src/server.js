@@ -1,11 +1,18 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
+
 const courses = require('./api/courses/index')
 const CoursesService = require('./services/postgres/CoursesService')
 const challenges = require('./api/challenges')
 const ChallengesService = require('./services/postgres/ChallengesService')
 const ClientError = require('./exceptions/ClientError')
+
+const managers = require('./api/managers/index')
+const ManagersService = require('./services/postgres/ManagersService')
+
+//const uploads = require('./api/uploads/index')
+//const UploadsService = require('./services/uploads/UploadsService')
 
 const init = async () => {
   const coursesService = new CoursesService()
