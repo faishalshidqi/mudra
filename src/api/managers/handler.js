@@ -1,12 +1,15 @@
 const ClientError = require("../../exceptions/ClientError");
 
 class ManagersHandler {
-    constructor(service) {
+    constructor(service, validator) {
         this._service = service
+        this._validator = validator
     }
 
     async postManagedCourseHandler(request, h){
         try {
+            this._validator.validateCourseManagerPayload(request.payload)
+
             const {title, sign_pict_link, description, type, is_deleted} = request.payload
             const course_id = await this._service.addManagedCourse({
                 title, sign_pict_link, description, type, is_deleted
@@ -53,7 +56,7 @@ class ManagersHandler {
     async getManagedCourseByIdHandler(request, h){
         try {
             const {id} = request.params
-            const course = (await this._service.getManagedCourseById(id)).rows
+            const course = ((await this._service.getManagedCourseById(id)).rows)[0]
             return {
                 status: 'success',
                 data: {
@@ -82,6 +85,7 @@ class ManagersHandler {
 
     async editCourseByIdHandler(request, h) {
         try {
+            this._validator.validateCourseManagerPayload(request.payload)
             const {id} = request.params
 
             await this._service.editManagedCourseById(id, request.payload)
