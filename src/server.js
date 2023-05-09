@@ -38,6 +38,12 @@ const init = async () => {
       },
     },
     {
+      plugin: managers,
+      options: {
+        service: managersService
+      }
+    },
+    {
       plugin: challenges,
       options: {
         service: challengesService
