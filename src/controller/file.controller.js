@@ -1,6 +1,6 @@
 const processFileMiddleware = require('../middleware/upload');
 const { Storage } = require('@google-cloud/storage');
-const storage = new Storage({ keyFilename: 'gcloudkey.json' });
+const storage = new Storage({ keyFilename: 'storagekey.json' });
 
 
 const upload = async (req, res) => {
