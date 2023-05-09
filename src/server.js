@@ -10,6 +10,7 @@ const ClientError = require('./exceptions/ClientError')
 
 const managers = require('./api/managers/index')
 const ManagersService = require('./services/postgres/ManagersService')
+const CourseManagersValidator = require('./validator/course_managers')
 
 //const uploads = require('./api/uploads/index')
 //const UploadsService = require('./services/uploads/UploadsService')
@@ -46,6 +47,13 @@ const init = async () => {
       plugin: challenges,
       options: {
         service: challengesService
+      }
+    },
+    {
+      plugin: managers,
+      options: {
+        service: managersService,
+        validator: CourseManagersValidator
       }
     }
   ])
