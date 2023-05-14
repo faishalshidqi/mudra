@@ -47,9 +47,7 @@ class ManagersHandler {
 		const info = (await this._service.getDashboardInfo()).rows[0]
 		return {
 			status: 'success',
-			data: {
-				info
-			}
+			data: info
 		}
 	}
 
