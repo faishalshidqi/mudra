@@ -2,26 +2,28 @@ import NavigationItem from "@/components/NavigationItem";
 require('dotenv').config()
 import Navigation from "@/components/Navigation";
 import Dashboard from "@/components/Dashboard";
+import DashboardItem from "@/components/DashboardItem";
+import Layout from "@/components/Layout";
+import FetchApi from "@/data/FetchApi";
 
 
 export default async function Home() {
-    const fetched = (await fetch(`${process.env.API_URL}/kll/dashboard`)).json()
+    const fetched = await FetchApi.getDashboard()
     return (
-    <div className='divide-y divide-slate-100'>
+    <Layout>
       <Navigation>
           <NavigationItem href='/' isActive>Dashboard</NavigationItem>
           <NavigationItem href='/courses'>Courses</NavigationItem>
           <NavigationItem href='/challenges'>Challenges</NavigationItem>
       </Navigation>
         <Dashboard>
-            <div>
-                <p>100 challenges are live</p>
-            </div>
-            <div>
-                <p>100 courses are live</p>
-            </div>
-
+            <DashboardItem>
+                <p>{fetched.info[0].challenges_total} challenges are live</p>
+            </DashboardItem>
+            <DashboardItem>
+                <p>{fetched.info[0].courses_total} courses are live</p>
+            </DashboardItem>
         </Dashboard>
-    </div>
+    </Layout>
   )
 }
