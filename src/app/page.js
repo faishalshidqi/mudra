@@ -1,6 +1,5 @@
 import NavigationItem from "@/components/NavigationItem";
 require('dotenv').config()
-import Image from 'next/image'
 import Navigation from "@/components/Navigation";
 import Dashboard from "@/components/Dashboard";
 
