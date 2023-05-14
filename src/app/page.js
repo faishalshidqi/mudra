@@ -28,7 +28,7 @@ export default async function Home() {
                         </div>
                         <div>
                             <dt className="sr-only">Info</dt>
-                            <dd className="group-hover:text-blue-700">{fetched.info[0].courses_total} challenges are live</dd>
+                            <dd className="group-hover:text-blue-700">{fetched.info[0].challenges_total} challenges are live</dd>
                         </div>
                     </dl>
                 </a>
