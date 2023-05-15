@@ -90,7 +90,7 @@ class ManagersHandler {
 		}
 	}
 
-	async editCourseByIdHandler(request, h) {
+	async editManagedCourseByIdHandler(request, h) {
 		try {
 			this._validator.validateCourseManagerPayload(request.payload)
 			const {id} = request.params
@@ -120,7 +120,7 @@ class ManagersHandler {
 		}
 	}
 
-	async deleteCourseByIdHandler(request, h){
+	async deleteManagedCourseByIdHandler(request, h){
 		try {
 			const {id} = request.params
 
@@ -146,6 +146,40 @@ class ManagersHandler {
 			response.code(500)
 			console.error(error)
 			return response
+		}
+	}
+
+	async postManagedChallengeHandler(request, h){
+		try {
+			const challenge_id = await this._service.addManagedChallenge(request.payload)
+
+			const response = h.response({
+				status: 'success',
+				message: 'Challenge is added successfully',
+				data: {
+					challenge_id
+				}
+			})
+			response.code(201)
+			return response
+		}
+		catch (error) {
+			if (error instanceof ClientError) {
+				if (error instanceof ClientError) {
+					const response = h.response({
+						status: 'failed',
+						message: error.message
+					})
+					response.code(error.statusCode)
+					return response
+				}
+				const response = h.response({
+					status: 'error',
+					message: 'Sorry for the inconvenience, our server is having an error.'
+				})
+				response.code(500)
+				return response
+			}
 		}
 	}
 }

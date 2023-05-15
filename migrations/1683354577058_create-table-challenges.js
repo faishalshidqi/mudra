@@ -4,7 +4,7 @@ exports.shorthands = undefined
 
 exports.up = pgm => {
 	pgm.createTable('challenges', {
-		id: {
+		challenge_id: {
 			type: 'varchar(50)',
 			primaryKey: true,
 		},

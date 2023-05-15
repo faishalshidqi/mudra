@@ -12,5 +12,5 @@ exports.up = pgm => {
 }
 
 exports.down = pgm => {
-	pgm.dropColumns('challenges', 'is_delete')
+	pgm.dropColumns('challenges', 'is_deleted')
 }

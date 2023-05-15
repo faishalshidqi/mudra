@@ -8,20 +8,20 @@ class ChallengesService {
 	}
 
 	async getChallenges() {
-		const query = 'SELECT * FROM challenges WHERE is_delete = false'
+		const query = 'SELECT * FROM challenges WHERE is_deleted = false'
 
 		const result = await this._pool.query(query)
 
 		if (!result.rowCount) {
 			throw new NotFoundError('Challenges tidak ditemukan')
 		}
-    
+
 		return result.rows.map(mapDBToModelChallenges)
 	}
 
 	async getChallengeById(id) {
 		const query = {
-			text: 'SELECT * FROM challenges WHERE id=$1',
+			text: 'SELECT * FROM challenges WHERE challenge_id=$1',
 			values: [id]
 		}
 
