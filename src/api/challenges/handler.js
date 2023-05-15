@@ -1,34 +1,34 @@
 class ChallengesHandler {
-  constructor(service) {
-    this._service = service
-  }
+	constructor(service) {
+		this._service = service
+	}
 
-  async getChallengesHandler() {
-    const challenges = await this._service.getChallenges()
+	async getChallengesHandler() {
+		const challenges = await this._service.getChallenges()
 
-    return {
-      status: 'success',
-      data: {
-        challenges
-      }
-    }
-  }
+		return {
+			status: 'success',
+			data: {
+				challenges
+			}
+		}
+	}
 
-  async getChallengeByIdHandler(request, h) {
-    const { id } = request.params
+	async getChallengeByIdHandler(request, h) {
+		const { id } = request.params
 
-    const challange = await this._service.getChallengeById(id)
+		const challange = await this._service.getChallengeById(id)
 
-    const response = h.response({
-      status: 'success',
-      data: {
-        challange
-      }
-    })
-    response.code(200)
+		const response = h.response({
+			status: 'success',
+			data: {
+				challange
+			}
+		})
+		response.code(200)
 
-    return response
-  }
+		return response
+	}
 }
 
 module.exports = ChallengesHandler
