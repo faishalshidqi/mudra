@@ -1,7 +1,6 @@
 class CoursesHandler {
-	constructor(service, /*validator*/) {
+	constructor(service) {
 		this._service = service
-		//this._validator = validator
 	}
 	async getCoursesHandler() {
 		const courses = await this._service.getCourses()

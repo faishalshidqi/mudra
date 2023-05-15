@@ -15,13 +15,13 @@ const mapDBToModelCourses = ({
 })
 
 const mapDBToModelChallenges = ({
-	id,
+	challenge_id,
 	title,
 	description,
 	course_id,
-	answer  
+	answer
 }) => ({
-	id,
+	challenge_id,
 	title,
 	description,
 	courseId: course_id,
