@@ -42,6 +42,13 @@ class ManagersHandler {
 			return response
 		}
 	}
+	async getDashboardInfoHandler() {
+		const info = (await this._service.getDashboardInfo()).rows[0]
+		return {
+			status: 'success',
+			data: info
+		}
+	}
 
 	async getManagedCoursesHandler(){
 		const courses = (await this._service.getManagedCourses()).rows

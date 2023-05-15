@@ -40,7 +40,8 @@ const init = async () => {
 		{
 			plugin: managers,
 			options: {
-				service: managersService
+				service: managersService,
+				validator: CourseManagersValidator
 			}
 		},
 		{
@@ -49,13 +50,6 @@ const init = async () => {
 				service: challengesService
 			}
 		},
-		{
-			plugin: managers,
-			options: {
-				service: managersService,
-				validator: CourseManagersValidator
-			}
-		}
 	])
 
 	server.ext('onPreResponse', (request, h) => {

@@ -9,7 +9,7 @@ class CoursesService {
 
 	async getCourses() {
 		const query = {
-			text: 'select * from courses'
+			text: 'select * from courses where is_deleted = false'
 		}
 		const result = await this._pool.query(query)
 
