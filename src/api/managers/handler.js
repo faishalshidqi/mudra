@@ -42,7 +42,6 @@ class ManagersHandler {
 			return response
 		}
 	}
-
 	async getDashboardInfoHandler() {
 		const info = (await this._service.getDashboardInfo()).rows[0]
 		return {
