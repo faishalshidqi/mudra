@@ -21,7 +21,7 @@ class ChallengesService {
 
 	async getChallengeById(id) {
 		const query = {
-			text: 'SELECT * FROM challenges WHERE challenge_id=$1',
+			text: 'SELECT * FROM challenges WHERE challenge_id = $1 and is_deleted = false',
 			values: [id]
 		}
 

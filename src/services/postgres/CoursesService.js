@@ -21,7 +21,7 @@ class CoursesService {
 
 	async getCourseById(id) {
 		const query = {
-			text: 'select * from courses where course_id = $1',
+			text: 'select * from courses where course_id = $1 and is_deleted = false',
 			values: [id]
 		}
 		const result = await this._pool.query(query)

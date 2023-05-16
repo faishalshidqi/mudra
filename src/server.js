@@ -8,9 +8,13 @@ const challenges = require('./api/challenges')
 const ChallengesService = require('./services/postgres/ChallengesService')
 const ClientError = require('./exceptions/ClientError')
 
-const managers = require('./api/managers/index')
-const ManagersService = require('./services/postgres/ManagersService')
+const course_managers = require('./api/course_managers/index')
+const CourseManagersService = require('./services/postgres/CourseManagersService')
 const CourseManagersValidator = require('./validator/course_managers')
+
+const challenge_managers = require('./api/challenge_managers/index')
+const ChallengeManagersService = require('./services/postgres/ChallengeManagersService')
+const ChallengeManagersValidator = require('./validator/challenge_managers')
 
 //const uploads = require('./api/uploads/index')
 //const UploadsService = require('./services/uploads/UploadsService')
@@ -18,7 +22,8 @@ const CourseManagersValidator = require('./validator/course_managers')
 const init = async () => {
 	const coursesService = new CoursesService()
 	const challengesService = new ChallengesService()
-	const managersService = new ManagersService()
+	const courseManagersService = new CourseManagersService()
+	const challengeManagersService = new ChallengeManagersService()
 
 	const server = Hapi.server({
 		port: process.env.PORT,
@@ -38,9 +43,9 @@ const init = async () => {
 			},
 		},
 		{
-			plugin: managers,
+			plugin: course_managers,
 			options: {
-				service: managersService,
+				service: courseManagersService,
 				validator: CourseManagersValidator
 			}
 		},
@@ -50,6 +55,13 @@ const init = async () => {
 				service: challengesService
 			}
 		},
+		{
+			plugin: challenge_managers,
+			options: {
+				service: challengeManagersService,
+				validator: ChallengeManagersValidator
+			}
+		}
 	])
 
 	server.ext('onPreResponse', (request, h) => {
