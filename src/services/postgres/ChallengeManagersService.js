@@ -59,7 +59,7 @@ class ChallengeManagersService {
 
 	async deleteManagedChallengeById(id) {
 		const query = {
-			text: 'delete from challenges where challenge_id = $1',
+			text: 'delete from challenges where challenge_id = $1 returning challenge_id',
 			values: [id]
 		}
 
