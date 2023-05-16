@@ -38,7 +38,6 @@ export default function Home({ dashboardData }) {
                             {/*<dd>{allDummyData[0].id}</dd>*/}
                             <dd className="group-hover:text-blue-700">{dashboardData.challenges_total} challenges are live</dd>
                         </div>
-                        //todo: create challenges pages
                     </dl>
                 </a>
             </DashboardItem>
