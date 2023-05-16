@@ -23,7 +23,15 @@ exports.up = pgm => {
 		answer: {
 			type: 'varchar(1)',
 			notNull: true
-		}
+		},
+		created_at: {
+			type: 'text',
+			notNull: true
+		},
+		updated_at: {
+			type: 'text',
+			notNull: true
+		},
 	})
 }
 

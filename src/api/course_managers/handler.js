@@ -1,6 +1,6 @@
 const ClientError = require('../../exceptions/ClientError')
 
-class ManagersHandler {
+class CourseManagersHandler {
 	constructor(service, validator) {
 		this._service = service
 		this._validator = validator
@@ -148,40 +148,6 @@ class ManagersHandler {
 			return response
 		}
 	}
-
-	async postManagedChallengeHandler(request, h){
-		try {
-			const challenge_id = await this._service.addManagedChallenge(request.payload)
-
-			const response = h.response({
-				status: 'success',
-				message: 'Challenge is added successfully',
-				data: {
-					challenge_id
-				}
-			})
-			response.code(201)
-			return response
-		}
-		catch (error) {
-			if (error instanceof ClientError) {
-				if (error instanceof ClientError) {
-					const response = h.response({
-						status: 'failed',
-						message: error.message
-					})
-					response.code(error.statusCode)
-					return response
-				}
-				const response = h.response({
-					status: 'error',
-					message: 'Sorry for the inconvenience, our server is having an error.'
-				})
-				response.code(500)
-				return response
-			}
-		}
-	}
 }
 
-module.exports = ManagersHandler
+module.exports = CourseManagersHandler
