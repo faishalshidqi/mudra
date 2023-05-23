@@ -25,9 +25,8 @@ export default function CoursesList({ challengesData }) {
                 {challengesData['challenges'].map((data) => (
                     <ListItem key={data.challenges_id} context={data} />
                 ))}
-                <ListItem key='asaasasas' context='asasa'/>
-                <ListItem key='123' context='123'/>
             </List>
+            //todo: create add new challenges form
         </Layout>
     )
 }

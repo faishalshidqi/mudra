@@ -1,6 +1,6 @@
 export default function List({children}) {
     return (
-        <ul className='divide-y divide-slate-100'>
+        <ul role="list" className="divide-y divide-gray-100">
             {children}
         </ul>
     )

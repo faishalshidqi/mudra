@@ -15,7 +15,6 @@ export async function getStaticProps() {
     }
 }
 export default function Home({ dashboardData }) {
-    // const fetched = await FetchApi.getDashboard()
     return (
     <Layout>
       <Navigation>
@@ -35,7 +34,6 @@ export default function Home({ dashboardData }) {
                         </div>
                         <div>
                             <dt className="sr-only">Info</dt>
-                            {/*<dd>{allDummyData[0].id}</dd>*/}
                             <dd className="group-hover:text-blue-700">{dashboardData.challenges_total} challenges are live</dd>
                         </div>
                     </dl>
@@ -52,7 +50,6 @@ export default function Home({ dashboardData }) {
                         </div>
                         <div>
                             <dt className="sr-only">Info</dt>
-                            {/*<dd>{allDummyData[1].id}</dd>*/}
                             <dd className="group-hover:text-blue-700">{dashboardData.courses_total} courses are live</dd>
                         </div>
                     </dl>
