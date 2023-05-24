@@ -3,5 +3,5 @@ export default function List({children}) {
         <ul role="list" className="divide-y divide-gray-100">
             {children}
         </ul>
-    )
+    );
 }

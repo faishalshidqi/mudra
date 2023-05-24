@@ -1,17 +1,17 @@
-import Layout from "../../components/Layout";
-import ListItem from "../../components/ListItem";
-import List from "../../components/List";
-import NavigationItem from "../../components/NavigationItem";
-import Navigation from "../../components/Navigation";
-import fetchApi from "../../lib/FetchApi";
+import Layout from '../../components/Layout';
+import ListItem from '../../components/ListItem';
+import List from '../../components/List';
+import NavigationItem from '../../components/NavigationItem';
+import Navigation from '../../components/Navigation';
+import fetchApi from '../../lib/FetchApi';
 
 export async function getStaticProps() {
-    const challengesData = await fetchApi.getAllChallenges()
+    const challengesData = await fetchApi.getAllChallenges();
     return {
         props: {
             challengesData
         }
-    }
+    };
 }
 export default function CoursesList({ challengesData }) {
     return (
@@ -28,5 +28,5 @@ export default function CoursesList({ challengesData }) {
             </List>
             //todo: create add new challenges form
         </Layout>
-    )
+    );
 }

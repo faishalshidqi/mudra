@@ -3,5 +3,5 @@ export default function DashboardItem({children}) {
         <li className='shadow-md bg-white rounded-lg text-black'>
             {children}
         </li>
-    )
+    );
 }

@@ -5,5 +5,5 @@ export default function Navigation({children}) {
                 {children}
             </ul>
         </nav>
-    )
+    );
 }

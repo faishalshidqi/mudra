@@ -5,5 +5,5 @@ export default function NavigationItem({href, isActive, children}) {
                 {children}
             </a>
         </li>
-    )
+    );
 }

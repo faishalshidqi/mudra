@@ -21,7 +21,7 @@ export default function AddCourseForm() {
     const handleOptionChange = (e) => {
         const optionValue = e.target.value;
         setSelectedOption(optionValue);
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ export default function AddCourseForm() {
         SendRequest.addNewCourse(courseData)
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
             <div className="space-y-12 space-x-5">
                 <div className="border-b border-white-900/10 pb-12">
                     <h2 className="text-base font-semibold leading-7 text-white">Add new course</h2>
@@ -98,8 +98,8 @@ export default function AddCourseForm() {
                                         checked={selectedOption === '1'}
                                         onChange={handleOptionChange}
                                     />
-                                        <label htmlFor="active"
-                                               className="block text-sm font-medium leading-6 text-white">Yes</label>
+                                    <label htmlFor="active"
+                                        className="block text-sm font-medium leading-6 text-white">Yes</label>
                                 </div>
                                 <div className="flex items-center gap-x-3">
                                     <input
@@ -111,8 +111,8 @@ export default function AddCourseForm() {
                                         checked={selectedOption === '0'}
                                         onChange={handleOptionChange}
                                     />
-                                        <label htmlFor="notActive"
-                                               className="block text-sm font-medium leading-6 text-white">No</label>
+                                    <label htmlFor="notActive"
+                                        className="block text-sm font-medium leading-6 text-white">No</label>
                                 </div>
                             </div>
                         </fieldset>
@@ -132,5 +132,5 @@ export default function AddCourseForm() {
                 </button>
             </div>
         </form>
-    )
+    );
 }
