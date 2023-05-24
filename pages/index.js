@@ -20,6 +20,7 @@ export default function Home({ dashboardData }) {
       <Navigation>
           <NavigationItem href='/' isActive>Dashboard</NavigationItem>
           <NavigationItem href='/courses'>Courses</NavigationItem>
+          <NavigationItem href='/courses/form'>Add New Course</NavigationItem>
           <NavigationItem href='/challenges'>Challenges</NavigationItem>
       </Navigation>
         <Dashboard>
