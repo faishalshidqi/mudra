@@ -1,5 +1,5 @@
 export default function ListItem({context}) {
-	console.log(context)
+	//console.log(context)
 	return (
 		<article className="flex items-start space-x-6 p-6">
 			<img src={context.sign_pict_link} alt="" width="60" height="88" className="flex-none rounded-md bg-slate-100" />
