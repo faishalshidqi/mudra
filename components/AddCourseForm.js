@@ -1,5 +1,5 @@
 import {useState} from "react";
-import SendRequest from "../lib/SendRequest";
+import fetchApi from "../lib/FetchApi";
 
 export default function AddCourseForm() {
     const [data, setData] = useState({
@@ -8,7 +8,8 @@ export default function AddCourseForm() {
         description: '',
         isActive: '',
     });
-    const [selectedOption, setSelectedOption] = useState('1');
+    const [selectedRadioOption, setSelectedRadioOption] = useState('1');
+    const [selectedOption, setSelectedOption] = useState('Default')
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -18,21 +19,30 @@ export default function AddCourseForm() {
         });
     };
 
-    const handleOptionChange = (e) => {
-        const optionValue = e.target.value;
-        setSelectedOption(optionValue);
+    const handleRadioValueChange = (e) => {
+        const radioValue = e.target.value;
+        setSelectedRadioOption(radioValue);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const courseData = {
-            title: data.title,
-            pictUrl: data.pictUrl,
-            description: data.description,
-            isActive: !!Number(selectedOption),
-        };
+    const handleOptionValueChange = (e) => {
+        const optionValue = e.target.value;
+        setSelectedOption(optionValue);
+    }
 
-        SendRequest.addNewCourse(courseData)
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const request = {
+            body: {
+                title: data.title,
+                sign_pict_link: data.pictUrl,
+                description: data.description,
+                type: selectedOption,
+                is_deleted: !(!!Number(selectedRadioOption)),
+            }
+        };
+        const response = await fetchApi.postCourse(request);
+
+        console.log(response)
     }
     return (
         <form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
@@ -84,6 +94,24 @@ export default function AddCourseForm() {
                                 />
                             </div>
                         </div>
+                        <div className="sm:col-span-full">
+                            <label htmlFor="type"
+                                   className="block text-sm font-medium leading-6 text-white">Course Type</label>
+                            <div className="mt-2">
+                                <select id="type"
+                                        name="type"
+                                        autoComplete="course-type"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                                        onChange={handleOptionValueChange}
+                                        value={selectedOption}
+                                >
+                                    <option value='Default' disabled>Choose Course Type</option>
+                                    <option value='SIBI'>SIBI</option>
+                                    <option value='BISINDO'>BISINDO</option>
+                                    <option value='ASL'>ASL</option>
+                                </select>
+                            </div>
+                        </div>
                         <fieldset>
                             <legend className="text-sm font-semibold leading-6 text-white">Is this course active?
                             </legend>
@@ -95,8 +123,8 @@ export default function AddCourseForm() {
                                         type="radio"
                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                         value='1'
-                                        checked={selectedOption === '1'}
-                                        onChange={handleOptionChange}
+                                        checked={selectedRadioOption === '1'}
+                                        onChange={handleRadioValueChange}
                                     />
                                     <label htmlFor="active"
                                         className="block text-sm font-medium leading-6 text-white">Yes</label>
@@ -108,8 +136,8 @@ export default function AddCourseForm() {
                                         type="radio"
                                         className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                         value='0'
-                                        checked={selectedOption === '0'}
-                                        onChange={handleOptionChange}
+                                        checked={selectedRadioOption === '0'}
+                                        onChange={handleRadioValueChange}
                                     />
                                     <label htmlFor="notActive"
                                         className="block text-sm font-medium leading-6 text-white">No</label>

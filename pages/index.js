@@ -7,7 +7,6 @@ import FetchApi from "../lib/FetchApi";
 
 export async function getStaticProps() {
     const dashboardData = await FetchApi.getDashboard()
-    console.log(dashboardData)
     return {
         props: {
             dashboardData
