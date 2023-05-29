@@ -9,7 +9,6 @@ class CourseManagersHandler {
 	async postManagedCourseHandler(request, h){
 		try {
 			this._validator.validateCourseManagerPayload(request.payload)
-
 			const {title, sign_pict_link, description, type, is_deleted} = request.payload
 			const course_id = await this._service.addManagedCourse({
 				title, sign_pict_link, description, type, is_deleted
