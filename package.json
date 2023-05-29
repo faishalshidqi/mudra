@@ -11,7 +11,8 @@
     "test": "jest --setupFiles dotenv/config -i",
     "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
     "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i",
-    "generate-dummy": "node test/GenerateDummyData.js"
+    "generate-dummy": "node test/GenerateDummyData.js",
+    "delete-dummy": "node test/DeleteDummyData.js"
   },
   "keywords": [],
   "author": "",

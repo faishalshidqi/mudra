@@ -6,8 +6,8 @@ const ChallengeManagerPayloadSchema = Joi.object({
 	description: Joi.string().required(),
 	course_id: Joi.string().required(),
 	answer: Joi.string().required(),
-	is_deleted: Joi.string().required(),
-	type: Joi.boolean().required()
+	is_deleted: Joi.boolean().required(),
+	type: Joi.string().required()
 })
 
 module.exports = {ChallengeManagerPayloadSchema}
