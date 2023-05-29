@@ -1,5 +1,9 @@
 import {useState} from "react";
 import fetchApi from "../lib/FetchApi";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 export default function AddCourseForm() {
     const [data, setData] = useState({
@@ -40,9 +44,23 @@ export default function AddCourseForm() {
                 is_deleted: !(!!Number(selectedRadioOption)),
             }
         };
-        const response = await fetchApi.postCourse(request);
-
-        console.log(response)
+        await fetchApi.postCourse(request)
+            .then(({course_id}) => {
+                return MySwal.fire({
+                    title: 'Success',
+                    text: `Berhasil menambahkan course. course id: ${course_id}`,
+                    icon: "success"
+                }).then(() => {
+                    window.location.href = '/courses'
+                })
+            })
+            .catch(e => {
+                return MySwal.fire({
+                    title: 'Error',
+                    text: 'Gagal menambahkan Course',
+                    icon: "error"
+                })
+            });
     }
     return (
         <form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
