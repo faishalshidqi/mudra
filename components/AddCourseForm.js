@@ -54,10 +54,10 @@ export default function AddCourseForm() {
                     window.location.href = '/courses'
                 })
             })
-            .catch(e => {
+            .catch((e) => {
                 return MySwal.fire({
                     title: 'Error',
-                    text: 'Gagal menambahkan Course',
+                    text: `Gagal menambahkan Course: ${e}`,
                     icon: "error"
                 })
             });
