@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint ./ --fix",
     "start-dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
     "migrate": "node-pg-migrate",
     "test": "jest --setupFiles dotenv/config -i",
     "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
