@@ -7,7 +7,7 @@ const routes = (handler) => [
 	{
 		method: 'GET',
 		path: '/kll/challenges',
-		handler: (request, h) => handler.getManagedChallengesHandler(request, h)
+		handler: (request) => handler.getManagedChallengesHandler(request)
 	},
 	{
 		method: 'GET',

@@ -72,6 +72,18 @@ class CourseManagersService {
 			throw new NotFoundError('Cannot delete not found course')
 		}
 	}
+
+	async getManagedCoursesByType(type) {
+		const query = {
+			text: 'select * from courses where type = $1',
+			values: [type]
+		}
+		const result = await this._pool.query(query)
+		if (!result.rowCount) {
+			throw new NotFoundError('Courses not found')
+		}
+		return result
+	}
 }
 
 module.exports = CourseManagersService

@@ -2,7 +2,7 @@ const routes = (handler) => [
 	{
 		method: 'GET',
 		path: '/courses',
-		handler: () => handler.getCoursesHandler()
+		handler: (request) => handler.getCoursesHandler(request)
 	},
 	{
 		method: 'GET',

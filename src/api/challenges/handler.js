@@ -3,13 +3,26 @@ class ChallengesHandler {
 		this._service = service
 	}
 
-	async getChallengesHandler() {
-		const challenges = await this._service.getChallenges()
-
-		return {
-			status: 'success',
-			data: {
-				challenges
+	async getChallengesHandler(request) {
+		const {type} = request.query
+		if (type == null) {
+			const challenges = await this._service.getChallenges()
+			console.log(challenges)
+			return {
+				status: 'success',
+				data: {
+					challenges
+				}
+			}
+		}
+		else {
+			const challenges = await this._service.getChallengesByType(type)
+			return {
+				status: 'success',
+				data: {
+					challenges,
+					type
+				}
 			}
 		}
 	}
@@ -17,12 +30,12 @@ class ChallengesHandler {
 	async getChallengeByIdHandler(request, h) {
 		const { id } = request.params
 
-		const challange = await this._service.getChallengeById(id)
+		const challenge = await this._service.getChallengeById(id)
 
 		const response = h.response({
 			status: 'success',
 			data: {
-				challange
+				challenge
 			}
 		})
 		response.code(200)

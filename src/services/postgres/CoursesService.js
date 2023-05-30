@@ -31,6 +31,18 @@ class CoursesService {
 		}
 		return result.rows.map(mapDBToModelCourses)[0]
 	}
+
+	async getCoursesByType(type) {
+		const query = {
+			text: 'select * from courses where type = $1 and is_deleted = false',
+			values: [type]
+		}
+		const result = await this._pool.query(query)
+		if (!result.rowCount) {
+			throw new NotFoundError('Course tidak ditemukan')
+		}
+		return result.rows.map(mapDBToModelCourses)
+	}
 }
 
 module.exports = CoursesService
