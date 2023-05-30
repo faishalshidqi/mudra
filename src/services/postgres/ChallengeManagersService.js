@@ -68,6 +68,18 @@ class ChallengeManagersService {
 			throw new NotFoundError('Cannot delete not found challenge')
 		}
 	}
+
+	async getManagedChallengesByType(type) {
+		const query = {
+			text: 'select * from challenges where type = $1',
+			values: [type]
+		}
+		const result = await this._pool.query(query)
+		if (!result.rowCount) {
+			throw new NotFoundError('Challenge not found')
+		}
+		return result
+	}
 }
 
 module.exports = ChallengeManagersService

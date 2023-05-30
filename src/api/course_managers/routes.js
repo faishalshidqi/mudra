@@ -12,7 +12,7 @@ const routes = (handler) => [
 	{
 		method: 'GET',
 		path: '/kll/courses',
-		handler: () => handler.getManagedCoursesHandler()
+		handler: (request) => handler.getManagedCoursesHandler(request)
 	},
 	{
 		method: 'GET',

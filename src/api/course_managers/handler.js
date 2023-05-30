@@ -50,12 +50,24 @@ class CourseManagersHandler {
 		}
 	}
 
-	async getManagedCoursesHandler(){
-		const courses = (await this._service.getManagedCourses()).rows
-		return {
-			status: 'success',
-			data: {
-				courses
+	async getManagedCoursesHandler(request){
+		const {type} = request.query
+		if (type == null) {
+			const courses = (await this._service.getManagedCourses()).rows
+			return {
+				status: 'success',
+				data: {
+					courses
+				}
+			}
+		}
+		else {
+			const courses = (await this._service.getManagedCoursesByType(type)).rows
+			return {
+				status: 'success',
+				data: {
+					courses
+				}
 			}
 		}
 	}
