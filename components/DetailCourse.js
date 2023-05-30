@@ -37,8 +37,6 @@ export default function DetailCourse({ courseData: {id, createdAt, description, 
                             icon: "error"
                         })
                     });
-            } else if (result.isDenied) {
-                console.log('No')
             }
         })
     }
