@@ -4,6 +4,6 @@ const nextConfig = {}
 
 module.exports = {
     env: {
-        API_URL: `http://${process.env.HOST}:${process.env.PORT}`
+        API_URL: process.env.API_URL
     }
 }
