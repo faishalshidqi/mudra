@@ -2,11 +2,22 @@ class CoursesHandler {
 	constructor(service) {
 		this._service = service
 	}
-	async getCoursesHandler() {
-		const courses = await this._service.getCourses()
-		return {
-			status: 'success',
-			data: courses
+	async getCoursesHandler(request) {
+		const {type} = request.query
+		if (type == null) {
+			const courses = await this._service.getCourses(type)
+			return {
+				status: 'success',
+				data: courses,
+				type: type
+			}
+		}
+		else {
+			const courses = await this._service.getCoursesByType(type)
+			return {
+				status: 'success',
+				data: courses
+			}
 		}
 	}
 
@@ -18,6 +29,15 @@ class CoursesHandler {
 			data: {
 				course
 			}
+		}
+	}
+
+	async getCoursesByTypeHandler(request) {
+		const {type} = request.params
+		const courses = await this._service.getCoursesByType(type)
+		return {
+			status: 'success',
+			data: courses
 		}
 	}
 }

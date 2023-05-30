@@ -5,7 +5,8 @@ const mapDBToModelCourses = ({
 	sign_pict_link,
 	description,
 	created_at,
-	updated_at
+	updated_at,
+	type
 }) => ({
 	id: course_id,
 	title,
@@ -13,7 +14,8 @@ const mapDBToModelCourses = ({
 	imageUrl: sign_pict_link,
 	description,
 	createdAt: created_at,
-	updatedAt: updated_at
+	updatedAt: updated_at,
+	type
 })
 
 const mapDBToModelChallenges = ({
@@ -21,13 +23,15 @@ const mapDBToModelChallenges = ({
 	title,
 	description,
 	course_id,
-	answer
+	answer,
+	type
 }) => ({
 	challenge_id,
 	title,
 	description,
 	courseId: course_id,
-	answer
+	answer,
+	type
 })
 
 module.exports = {

@@ -41,12 +41,24 @@ class ChallengeManagersHandler {
 		}
 	}
 
-	async getManagedChallengesHandler() {
-		const challenges = (await this._service.getManagedChallenges()).rows
-		return {
-			status: 'success',
-			data: {
-				challenges
+	async getManagedChallengesHandler(request) {
+		const {type} = request.query
+		if (type == null) {
+			const challenges = (await this._service.getManagedChallenges()).rows
+			return {
+				status: 'success',
+				data: {
+					challenges
+				}
+			}
+		}
+		else {
+			const challenges = (await this._service.getManagedChallengesByType(type)).rows
+			return {
+				status: 'success',
+				data: {
+					challenges
+				}
 			}
 		}
 	}
