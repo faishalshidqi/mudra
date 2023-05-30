@@ -1,6 +1,6 @@
 node_modules
 storagekey.json
-.env.local
+.env
 .prod.env
-mudra-dev-385811-bc3283cd8434.json
 .idea
+mudra-development-e072459cc52d.json

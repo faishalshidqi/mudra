@@ -1,6 +1,6 @@
 const processFileMiddleware = require('../middleware/upload');
 const { Storage } = require('@google-cloud/storage');
-const storage = new Storage({ keyFilename: 'storagekey.json' });
+const storage = new Storage({ keyFile: 'mudra-development-e072459cc52d.json' });
 
 
 const upload = async (req, res) => {
@@ -9,8 +9,8 @@ const upload = async (req, res) => {
         if (!req.file) {
             return res.status(400).send({ message: 'file tidak ada!' });
         }
-        const bucketName = 'test-dimas';
-        const foldername = req.body.foldername ?? 'resources/statics/images';
+        const bucketName = process.env.BUCKET_NAME;
+        const foldername = req.body.foldername ?? 'courses';
         const bucket = storage.bucket(bucketName);
         const file = `${foldername}/${req.file.originalname}`;
         const blob = bucket.file(file);
