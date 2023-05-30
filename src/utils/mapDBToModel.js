@@ -6,7 +6,6 @@ const mapDBToModelCourses = ({
 	description,
 	created_at,
 	updated_at,
-	type
 }) => ({
 	id: course_id,
 	title,
@@ -15,7 +14,6 @@ const mapDBToModelCourses = ({
 	description,
 	createdAt: created_at,
 	updatedAt: updated_at,
-	type
 })
 
 const mapDBToModelChallenges = ({
