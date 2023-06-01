@@ -7,3 +7,4 @@ _test/
 test/
 mudra-dev-385811-bc3283cd8434.json
 .idea
+!test/GenerateDummyData.js

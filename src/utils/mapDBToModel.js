@@ -1,19 +1,19 @@
 const mapDBToModelCourses = ({
 	course_id,
 	title,
+	type,
 	sign_pict_link,
 	description,
 	created_at,
 	updated_at,
-	type
 }) => ({
 	id: course_id,
 	title,
+	type,
 	imageUrl: sign_pict_link,
 	description,
 	createdAt: created_at,
 	updatedAt: updated_at,
-	type
 })
 
 const mapDBToModelChallenges = ({

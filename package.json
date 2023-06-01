@@ -6,11 +6,13 @@
   "scripts": {
     "lint": "eslint ./ --fix",
     "start-dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
     "migrate": "node-pg-migrate",
     "test": "jest --setupFiles dotenv/config -i",
     "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
-    "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i"
+    "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i",
+    "generate-dummy": "node test/GenerateDummyData.js",
+    "delete-dummy": "node test/DeleteDummyData.js"
   },
   "keywords": [],
   "author": "",
@@ -21,14 +23,15 @@
     "@hapi/hapi": "^21.3.2",
     "@hapi/inert": "^7.1.0",
     "dateformat": "^5.0.3",
-    "dotenv": "^16.0.3",
     "joi": "^17.9.2",
     "multer": "^1.4.5-lts.1",
     "nanoid": "^3.2.0",
     "node-pg-migrate": "^6.2.2",
-    "pg": "^8.10.0"
+    "pg": "^8.10.0",
+    "pg-format": "^1.0.4"
   },
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
     "jest": "^29.5.0",
     "nodemon": "^2.0.22"

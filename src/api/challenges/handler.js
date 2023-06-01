@@ -7,7 +7,6 @@ class ChallengesHandler {
 		const {type} = request.query
 		if (type == null) {
 			const challenges = await this._service.getChallenges()
-			console.log(challenges)
 			return {
 				status: 'success',
 				data: {
@@ -20,8 +19,7 @@ class ChallengesHandler {
 			return {
 				status: 'success',
 				data: {
-					challenges,
-					type
+					challenges
 				}
 			}
 		}
