@@ -8,15 +8,18 @@ class CoursesHandler {
 			const courses = await this._service.getCourses(type)
 			return {
 				status: 'success',
-				data: courses,
-				type: type
+				data: {
+					courses
+				}
 			}
 		}
 		else {
 			const courses = await this._service.getCoursesByType(type)
 			return {
 				status: 'success',
-				data: courses
+				data: {
+					courses
+				}
 			}
 		}
 	}
