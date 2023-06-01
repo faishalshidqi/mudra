@@ -4,3 +4,4 @@ storagekey.json
 .prod.env
 mudra-dev-385811-bc3283cd8434.json
 .idea
+.env
