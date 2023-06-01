@@ -4,6 +4,7 @@ const nextConfig = {}
 
 module.exports = {
     env: {
-        API_URL: process.env.API_URL
+        API_URL: process.env.API_URL,
+        UPLOAD_URL: process.env.UPLOAD_URL
     }
 }
