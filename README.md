@@ -104,3 +104,4 @@ Endpoints
   }
 }
 ```
+- GET /kll/courses
