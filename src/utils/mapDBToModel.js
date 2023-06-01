@@ -24,7 +24,7 @@ const mapDBToModelChallenges = ({
 	answer,
 	type
 }) => ({
-	challenge_id,
+	id: challenge_id,
 	title,
 	description,
 	course_id,
