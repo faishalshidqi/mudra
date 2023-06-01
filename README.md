@@ -27,19 +27,19 @@ Endpoints
         "id": "text",
         "title": "text",
         "type": "text",
-        "imageUrl": "text",
+        "image_url": "text",
         "description": "long text",
-        "createdAt": "ISO Date",
-        "updatedAt": "ISO Date"
+        "created_at": "ISO Date",
+        "updated_at": "ISO Date"
       },
       {
         "id": "text",
         "title": "text",
         "type": "text",
-        "imageUrl": "text",
+        "image_url": "text",
         "description": "long text",
-        "createdAt": "ISO Date",
-        "updatedAt": "ISO Date"
+        "created_at": "ISO Date",
+        "updated_at": "ISO Date"
       }
     ]
   }
@@ -54,10 +54,10 @@ Endpoints
       "id": "text",
       "title": "text",
       "type": "text",
-      "imageUrl": "text",
+      "image_url": "text",
       "description": "long text",
-      "createdAt": "ISO Date",
-      "updatedAt": "ISO Date"
+      "created_at": "ISO Date",
+      "updated_at": "ISO Date"
     }
   }
 }
@@ -72,7 +72,7 @@ Endpoints
         "challenge_id": "text",
         "title": "text",
         "description": "long text",
-        "courseId": "text",
+        "course_id": "text",
         "answer": "text",
         "type": "text"
       },
@@ -80,7 +80,7 @@ Endpoints
         "challenge_id": "text",
         "title": "text",
         "description": "long text",
-        "courseId": "text",
+        "course_id": "text",
         "answer": "text",
         "type": "text"
       }
@@ -97,10 +97,11 @@ Endpoints
       "challenge_id": "text",
       "title": "text",
       "description": "long text",
-      "courseId": "text",
+      "course_id": "text",
       "answer": "text",
       "type": "text"
     }
   }
 }
 ```
+- GET /kll/courses
