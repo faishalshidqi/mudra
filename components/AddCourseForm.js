@@ -55,27 +55,28 @@ export default function AddCourseForm() {
 
 	}
 
-	const handleUpload = (e) => {
+	const handleUpload = async (e) => {
 		e.preventDefault()
 		const request = {
 			file,
 		}
-		fetchApi.uploadImage(request)
-			.then((response) => {
-				console.log(response)
+		return await fetchApi.uploadImage(request)
+			.then(({ url }) => {
+				return url
 			})
 			.catch((e) => {
-				console.log(e)
+				return e;
 			})
 	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
+		const pictUrl = await handleUpload(e);
 		const request = {
 			body: {
 				title: data.title,
-				sign_pict_link: data.pictUrl,
+				sign_pict_link: pictUrl,
 				description: data.description,
 				type: selectedOption,
 				is_deleted: !(Number(selectedRadioOption)),
@@ -100,7 +101,7 @@ export default function AddCourseForm() {
 			})
 	}
 	return (
-		<form onSubmit={handleUpload} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
+		<form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
 			<div className="space-y-12 space-x-5">
 				<div className="border-b border-white-900/10 pb-12">
 					<h2 className="text-base font-semibold leading-7 text-white">Add new course</h2>
@@ -148,21 +149,6 @@ export default function AddCourseForm() {
 								</div>
 							</div>
 						</div>
-						{/*<div className="sm:col-span-4">*/}
-						{/*  <label htmlFor="pictUrl" className="block text-sm font-medium leading-6 text-white">*/}
-						{/*    Sign Picture*/}
-						{/*  </label>*/}
-						{/*  <div className="mt-2">*/}
-						{/*    <input*/}
-						{/*        type="text"*/}
-						{/*        name="pictUrl"*/}
-						{/*        id="pictUrl"*/}
-						{/*        className="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"*/}
-						{/*        value={data.pictUrl}*/}
-						{/*        onChange={handleChange}*/}
-						{/*    />*/}
-						{/*  </div>*/}
-						{/*</div>*/}
 						<div className="col-span-full">
 							<label htmlFor="description" className="block text-sm font-medium leading-6 text-white">
                   Description

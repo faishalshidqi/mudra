@@ -5,7 +5,7 @@ import NavigationItem from "../../../components/NavigationItem"
 import Layout from "../../../components/layout"
 import DetailCourse from "../../../components/DetailCourse"
 
-export default function Detail({ data }) {
+export default function Detail({ course }) {
 	const router = useRouter()
 	if(router.isFallback) {
 		return (
@@ -27,23 +27,24 @@ export default function Detail({ data }) {
 				<NavigationItem href='/courses/form'>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
 			</Navigation>
-			<DetailCourse className="mr-2" courseData={data}></DetailCourse>
+			<DetailCourse className="mr-2" courseData={course}></DetailCourse>
 		</Layout>
 	)
 }
 
 export async function getStaticPaths() {
-	const paths = fetchApi.getCoursesId()
+	const id = await fetchApi.getCoursesId()
+	const paths = id.map((id) => ({params: {id: id}}));
 	return {
 		paths,
-		fallback: true,
+		fallback: false,
 	}
 }
 export async function getStaticProps({ params }){
-	const { course: data } = fetchApi.getCoursesById(params.id)
+	const { course } = await fetchApi.getCoursesById(params.id)
 	return {
 		props: {
-			data
+			course: course ?? null
 		}
 	}
 }

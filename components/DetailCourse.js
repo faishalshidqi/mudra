@@ -6,7 +6,7 @@ import fetchApi from "../lib/FetchApi"
 
 const MySwal = withReactContent(Swal)
 
-export default function DetailCourse({ courseData: {id, createdAt, description, imageUrl, title, type, updatedAt} }) {
+export default function DetailCourse({ courseData: {id, created_at, description, sign_pict_link, title, type, updated_at} }) {
 
 	const handleDelete = () => {
 		return MySwal.fire({
@@ -20,8 +20,7 @@ export default function DetailCourse({ courseData: {id, createdAt, description, 
 		}).then(async (result) => {
 			if (result.isConfirmed) {
 				await fetchApi.deleteCourse(id)
-					.then((g) => {
-						console.log(g)
+					.then(() => {
 						return MySwal.fire({
 							title: "Success",
 							text: "Berhasil Menghapus course",
@@ -80,11 +79,11 @@ export default function DetailCourse({ courseData: {id, createdAt, description, 
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 						<dt className="text-sm font-medium leading-6 text-white">Created At</dt>
-						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={createdAt}></Date>
+						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={created_at}></Date>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 						<dt className="text-sm font-medium leading-6 text-white">Updated At</dt>
-						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={updatedAt}></Date>
+						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={updated_at}></Date>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 						<dt className="text-sm font-medium leading-6 text-white">Course Description</dt>
@@ -103,7 +102,7 @@ export default function DetailCourse({ courseData: {id, createdAt, description, 
 										</div>
 									</div>
 									<div className="ml-4 flex-shrink-0">
-										<Link href={imageUrl} className="font-medium text-indigo-600 hover:text-indigo-500">
+										<Link href={sign_pict_link} className="font-medium text-indigo-600 hover:text-indigo-500">
                                             See Image
 										</Link>
 									</div>
