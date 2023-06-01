@@ -6,6 +6,7 @@ const storage = new Storage({ keyFilename: 'storagekey.json' });
 const upload = async (req, res) => {
     try {
         await processFileMiddleware(req, res);
+        console.log(req);
         if (!req.file) {
             return res.status(400).send({ message: 'file tidak ada!' });
         }
@@ -28,7 +29,7 @@ const upload = async (req, res) => {
             try {
                 await bucket.file(file).makePublic();
             } catch (error) {
-                return res.status(500).send({
+                return res.status(403).send({
                     message: 'upload success but public access denied',
                     url: publicUrl,
                     err: error,
@@ -43,7 +44,7 @@ const upload = async (req, res) => {
         blobstream.end(req.file.buffer);
     } catch (error) {
         res.status(500).send({
-            message: 'tidak bisa mengupload gambar!'
+            message: `tidak bisa mengupload gambar! ${error}`
         });
     }
 };
