@@ -23,10 +23,10 @@ export default function CoursesList({ challengesData }) {
 			</Navigation>
 			<List>
 				{challengesData["challenges"].map((data) => (
-					<ListItem key={data.challenges_id} context={data} />
+					<ListItem key={data.challenge_id} context={data} />
 				))}
 			</List>
-            //todo: create add new challenges form
+
 		</Layout>
 	)
 }
