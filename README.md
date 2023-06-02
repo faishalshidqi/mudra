@@ -12,9 +12,12 @@ If you haven't installed nodejs, please download it from [here](https://nodejs.o
 - After git is installed, clone this repo using this command <br> 
 `git clone -b api https://github.com/faishalshidqi/capstone-api.git`
 - Ensure the cloned directory has a package.json file
-- Install the nodejs dependencies using this command <br> `npm install`
-- Use this command to start the development server <br> `npm run start-dev`
-- Use this command to start the production server <br> `npm run start`
+- Install the nodejs dependencies using this command
+<br>`npm install`
+- Use this command to start the development server
+<br>`npm run start-dev`
+- Use this command to start the production server
+<br>`npm run start`
 
 Endpoints
 - GET /courses
