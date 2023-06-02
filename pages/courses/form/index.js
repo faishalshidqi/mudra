@@ -1,9 +1,9 @@
 import Navigation from "../../../components/Navigation"
 import NavigationItem from "../../../components/NavigationItem"
 import Layout from "../../../components/layout"
-import AddCourseForm from "../../../components/AddCourseForm"
+import CourseForm from "../../../components/CourseForm"
 
-export default function CourseForm() {
+export default function Form() {
 	return (
 		<Layout>
 			<Navigation>
@@ -12,7 +12,7 @@ export default function CourseForm() {
 				<NavigationItem href='/courses/form' isActive>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
 			</Navigation>
-			<AddCourseForm className="mr-2"></AddCourseForm>
+			<CourseForm className="mr-2"></CourseForm>
 		</Layout>
 	)
 }

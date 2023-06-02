@@ -3,11 +3,17 @@ import Date from "./Date"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import fetchApi from "../lib/FetchApi"
-
+import {useRouter} from "next/router";
 const MySwal = withReactContent(Swal)
 
-export default function DetailCourse({ courseData: {id, created_at, description, sign_pict_link, title, type, updated_at} }) {
+export default function DetailCourse({ courseData: {course_id: id, created_at, description, sign_pict_link, title, type, updated_at} }) {
+	const router = useRouter()
 
+	const handleRedirect = (e) => {
+		e.preventDefault();
+
+		void router.push(`/courses/detail/${id}/form`);
+	}
 	const handleDelete = () => {
 		return MySwal.fire({
 			confirmButtonText: "Yes",
@@ -39,15 +45,16 @@ export default function DetailCourse({ courseData: {id, created_at, description,
 			}
 		})
 	}
-
 	return (
 		<div className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
 			<div className="px-4 sm:px-0">
 				<h3 className="text-base font-semibold leading-7 text-white">Course Detail</h3>
-				<div className="mt-5 flex lg:ml-4 lg:mt-0">
-					<span className="hidden sm:block">
+				<div className="mt-5 flex lg:ml-4 lg:mt-0 py-2">
+					<span className="sm:block">
 						<button type="button"
-							className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+							className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+							onClick={handleRedirect}
+						>
 							<svg className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
 								aria-hidden="true">
 								<path

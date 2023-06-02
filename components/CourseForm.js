@@ -2,21 +2,41 @@ import {useState} from "react"
 import fetchApi from "../lib/FetchApi"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import Link from "next/link";
+import {useRouter} from "next/router";
 
 const MySwal = withReactContent(Swal)
 
-export default function AddCourseForm() {
-	const [data, setData] = useState({
+export default function CourseForm({courseData}) {
+
+	const router = useRouter()
+	const isActive = () => {
+		return courseData?.is_deleted ? '0' : '1'
+	}
+	const setDataFromProps = () => {
+		return {
+			title: courseData?.title,
+			pictUrl: courseData?.sign_pict_link,
+			description: courseData?.description,
+			isActive: isActive(),
+		}
+	}
+	const [data, setData] = useState(setDataFromProps() ?? {
 		title: "",
 		pictUrl: "",
 		description: "",
-		file: "",
 		isActive: "",
 	})
-	const [selectedRadioOption, setSelectedRadioOption] = useState("1")
-	const [selectedOption, setSelectedOption] = useState("Default")
+	const setFileUrlFromProps = () => {
+		if (courseData) return (
+			<Link href={courseData?.sign_pict_link} target='_blank'>{courseData?.sign_pict_link.split('/')[5]}</Link>
+		)
+	}
+	const [selectedRadioOption, setSelectedRadioOption] = useState( isActive() ?? "1")
+	const [selectedOption, setSelectedOption] = useState(courseData?.type ?? "Default")
 	const [file, setFile] = useState(new FormData())
-	const [fileName, setFilename] = useState("")
+	const [fileName, setFilename] = useState(setFileUrlFromProps() ?? "")
+	const [isFileUploadHandlerInvoked, setIsFileUploadHandlerInvoked] = useState(false)
 
 	const handleChange = (e) => {
 		const value = e.target.value
@@ -25,6 +45,8 @@ export default function AddCourseForm() {
 			[e.target.name]: value
 		})
 	}
+
+
 
 	const handleRadioValueChange = (e) => {
 		const radioValue = e.target.value
@@ -40,7 +62,7 @@ export default function AddCourseForm() {
 		const maxSize = 5 * 1024 * 1024
 		const file = e.target.files[0]
 		if (file.size > maxSize) {
-			MySwal.fire({
+			void MySwal.fire({
 				title: "Image Upload Error",
 				text: "The file you are trying to upload exceeds the maximum allowed file size",
 				icon: "error"
@@ -52,7 +74,7 @@ export default function AddCourseForm() {
 		formData.append(e.target.name, e.target.files[0])
 		setFilename(formData.get(e.target.name).name)
 		setFile(formData)
-
+		setIsFileUploadHandlerInvoked(true)
 	}
 
 	const handleUpload = async (e) => {
@@ -60,7 +82,7 @@ export default function AddCourseForm() {
 		const request = {
 			file,
 		}
-		return await fetchApi.uploadImage(request)
+		return await fetchApi.uploadCourseImage(request)
 			.then(({ url }) => {
 				return url
 			})
@@ -72,6 +94,39 @@ export default function AddCourseForm() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
+		if (courseData) {
+			const request = {
+				body: {
+					title: data.title,
+					sign_pict_link: data.pictUrl,
+					description: data.description,
+					type: selectedOption,
+					is_deleted: !(Number(selectedRadioOption)),
+				}
+			}
+			if (isFileUploadHandlerInvoked) {
+				request.body.sign_pict_link = await handleUpload(e)
+			}
+			await fetchApi.editCourseById(courseData["course_id"], request)
+				.then(() => {
+					return MySwal.fire({
+						title: "Success",
+						text: `Berhasil memperbarui course!`,
+						icon: "success"
+					}).then(() => {
+						router.back()
+					})
+				})
+				.catch((e) => {
+					return MySwal.fire({
+						title: "Error",
+						text: `Gagal memperbarui Course: ${e}`,
+						icon: "error"
+					})
+				})
+			return;
+		}
+
 		const pictUrl = await handleUpload(e);
 		const request = {
 			body: {
@@ -82,7 +137,7 @@ export default function AddCourseForm() {
 				is_deleted: !(Number(selectedRadioOption)),
 			}
 		}
-		await fetchApi.postCourse(request)
+		await fetchApi.addNewCourse(request)
 			.then(({course_id}) => {
 				return MySwal.fire({
 					title: "Success",
@@ -99,6 +154,14 @@ export default function AddCourseForm() {
 					icon: "error"
 				})
 			})
+	}
+	const handleClickButton = (e) => {
+		e.preventDefault();
+		if (window.history.length > 1) {
+			router.back();
+		} else {
+			void router.push('/courses');
+		}
 	}
 	return (
 		<form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
@@ -191,7 +254,7 @@ export default function AddCourseForm() {
 										name="isActive"
 										type="radio"
 										className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-										value='1'
+										value={'1'}
 										checked={selectedRadioOption === "1"}
 										onChange={handleRadioValueChange}
 									/>
@@ -218,7 +281,11 @@ export default function AddCourseForm() {
 			</div>
 
 			<div className="mt-6 flex items-center justify-start gap-x-6">
-				<button type="button" className="text-sm rounded-md py-2 px-3 bg-red-600 font-semibold leading-6 text-white">
+				<button
+					type="button"
+					className="text-sm rounded-md py-2 px-3 bg-red-600 font-semibold leading-6 text-white"
+					onClick={handleClickButton}
+				>
             Cancel
 				</button>
 				<button
