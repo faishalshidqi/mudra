@@ -10,7 +10,7 @@ Mudra is a hand sign learning platform that aims to help people communicate with
 <br>
 If you haven't installed nodejs, please download it from [here](https://nodejs.org/en/download).
 - After git is installed, clone this repo using this command <br> 
-`git clone -b api https://github.com/faishalshidqi/capstone-api.git`
+`git clone -b api https://github.com/faishalshidqi/capstone-api`
 - Ensure the cloned directory has a package.json file
 - Install the nodejs dependencies using this command
 <br>`npm install`
