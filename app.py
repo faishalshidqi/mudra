@@ -347,9 +347,8 @@ def predict():
             return jsonify(pred)
         else:
             return jsonify({"status": "success", "message": "Input tidak valid. Silakan coba lagi."})
-
     except:
-        raise ValueError("Tangan Tidak Terdeteksi")
+        raise ValueError(jsonify({"status": "failed", "message": "Tangan Tidak Terdeteksi"}))
 
 
 if __name__ == '__main__':
