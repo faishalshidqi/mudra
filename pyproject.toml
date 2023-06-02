@@ -1,0 +1,29 @@
+[project]
+name = "mudra-ml-handsign"
+version = "0.0.1"
+dependencies = [
+    "blinker",
+    "certifi",
+    "charset-normalizer",
+    "click",
+    'flask',
+    "gunicorn",
+    "idna",
+    "importlib-metadata",
+    "itsdangerous",
+    "Jinja2",
+    "MarkupSafe",
+    "requests",
+    "urllib3",
+    "Werkzeug",
+    "zipp",
+    "opencv-python",
+    "mediapipe",
+    "python-dotenv",
+    "tensorflow",
+    "numpy",
+    "flask-cors",
+    "waitress",
+    "wheel",
+    "build"
+]

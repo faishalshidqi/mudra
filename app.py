@@ -6,10 +6,12 @@ import mediapipe as mp
 import numpy as np
 from flask import Flask, jsonify, request
 from tensorflow import keras
+from flask_cors import CORS, cross_origin
 
 dotenv.load_dotenv('.env')
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 model_Bisindo = keras.models.load_model('model_Bisindo_new1.h5')
 model_SIBI = keras.models.load_model('model_sibi_new.h5')
@@ -352,4 +354,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=9000)
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get("PORT")))

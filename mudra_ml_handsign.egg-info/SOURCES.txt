@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+mudra_ml_handsign.egg-info/PKG-INFO
+mudra_ml_handsign.egg-info/SOURCES.txt
+mudra_ml_handsign.egg-info/dependency_links.txt
+mudra_ml_handsign.egg-info/requires.txt
+mudra_ml_handsign.egg-info/top_level.txt
