@@ -1,6 +1,6 @@
 import os
 
-import cv2 as cv
+import cv2
 import dotenv
 import mediapipe as mp
 import numpy as np
@@ -26,13 +26,13 @@ if not os.path.exists('static'):
 def extract_feature(input_image):
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
-    image = cv.imread(input_image)
+    image = cv2.imread(input_image)
     with mp_hands.Hands(static_image_mode=True, max_num_hands=2, min_detection_confidence=0.1) as hands:
         while True:
-            results = hands.process(cv.flip(cv.cvtColor(image, cv.COLOR_BGR2RGB), 1))
+            results = hands.process(cv2.flip(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), 1))
             image_height, image_width, _ = image.shape
             if results.multi_hand_landmarks:
-                annotated_image = cv.flip(image.copy(), 1)
+                annotated_image = cv2.flip(image.copy(), 1)
                 for hand_landmarks in results.multi_hand_landmarks:
                     pergelangan_X = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].x * image_width
                     pergelangan_Y = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST].y * image_height
@@ -236,7 +236,7 @@ def extract_feature(input_image):
 
                 annotated_image = 0
 
-                annotated_image = cv.flip(image.copy(), 1)
+                annotated_image = cv2.flip(image.copy(), 1)
 
                 return (pergelangan_X, pergelangan_Y, pergelangan_Z,
                         ibujari_CmcX, ibujari_CmcY, ibujari_CmcZ,
@@ -330,6 +330,11 @@ def trigger(model, image_path):
     return response_dict
 
 
+@app.route('/', methods=['GET'])
+def hello():
+    return "Online"
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -351,7 +356,3 @@ def predict():
             return jsonify({"status": "success", "message": "Input tidak valid. Silakan coba lagi."})
     except:
         raise ValueError(jsonify({"status": "failed", "message": "Tangan Tidak Terdeteksi"}))
-
-
-if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get("PORT")))
