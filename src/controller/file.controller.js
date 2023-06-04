@@ -6,9 +6,8 @@ const storage = new Storage({ keyFile: 'mudra-development-e072459cc52d.json' });
 const upload = async (req, res) => {
     try {
         await processFileMiddleware(req, res);
-        console.log(req);
         if (!req.file) {
-            return res.status(400).send({ message: 'file tidak ada!' });
+            return res.status(400).send({ status: 'fail', message: 'file tidak ada!' });
         }
         const bucketName = process.env.BUCKET_NAME;
         const foldername = req.body.foldername ?? 'courses';
@@ -20,7 +19,7 @@ const upload = async (req, res) => {
         });
 
         blobstream.on('error', (err) => {
-            res.status(500).send({ message: `${err.message} - stream error` });
+            res.status(500).send({ status: 'error', message: `${err.message} - stream error` });
         });
 
         blobstream.on('finish', async () => {
@@ -30,6 +29,7 @@ const upload = async (req, res) => {
                 await bucket.file(file).makePublic();
             } catch (error) {
                 return res.status(202).send({
+                    status: 'success',
                     message: 'upload success but public access denied',
                     url: publicUrl,
                     err: error,
@@ -37,6 +37,7 @@ const upload = async (req, res) => {
             }
 
             res.status(200).send({
+                status: 'success',
                 message: 'upload file successful',
                 url: publicUrl
             });
@@ -44,6 +45,7 @@ const upload = async (req, res) => {
         blobstream.end(req.file.buffer);
     } catch (error) {
         res.status(500).send({
+            status: 'error',
             message: `tidak bisa mengupload gambar! ${error}`
         });
     }
