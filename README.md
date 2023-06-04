@@ -495,3 +495,20 @@ Content-Type: multipart/form-data
   "message":"text"
 }
 ```
+# Hand Sign ML Call
+## How to replicate
+## How to replicate
+- All commands are done in terminal
+- Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
+  <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
+- Ensure you have python installed on your machine. Use this command in terminal to ensure the python installation. <br> `python3 --version`
+  <br> If you haven't installed python, please download it from [here](https://www.python.org/downloads/).
+- After git is installed, clone this repo using this command <br>
+  ```git clone -b ml-call https://github.com/faishalshidqi/capstone-api```
+- Ensure the cloned directory has a requirements.txt file
+- Install the python dependencies using this command
+  <br>`pip3 install -r requirements.txt`
+- Use this command to start the development server
+  <br>`flask run --host 127.0.0.1 --port <insert available port>`
+- Use this command to start the production server
+  <br>`gunicorn --bind:<insert desired/available port> wsgi:app`
