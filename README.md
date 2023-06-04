@@ -23,7 +23,7 @@ Mudra is a hand sign learning platform that aims to help people communicate with
 - GET /courses\
 supporting filter by type using query parameter `?type=` \
 supported value = **ASL, BISINDO, SIBI** \
-for example: /courses?type=SIBI\
+for example: /courses?type=SIBI
 
 #### Success Response (200 OK)
 ```json
@@ -303,7 +303,7 @@ for example: /courses?type=SIBI\
   "message": "text"
 }
 ```
-- POST /kll/courses\
+- POST /kll/courses
 #### Body Payload
 ```json
 {
