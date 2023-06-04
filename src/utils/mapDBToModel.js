@@ -22,14 +22,18 @@ const mapDBToModelChallenges = ({
 	description,
 	course_id,
 	answer,
-	type
+	type,
+	created_at,
+	updated_at
 }) => ({
 	id: challenge_id,
 	title,
 	description,
 	course_id,
 	answer,
-	type
+	type,
+	created_at,
+	updated_at
 })
 
 module.exports = {
