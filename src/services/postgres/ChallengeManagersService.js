@@ -47,7 +47,7 @@ class ChallengeManagersService {
 	async editManagedChallengeById(id, {title, description, course_id, answer, is_deleted, type}) {
 		const updated_at = new Date().toISOString()
 		const query = {
-			text: 'update challenges set title = $1, description = $2, course_id = $3, answer = $4, is_delete = $5, type = $6, updated_at = $7 where id = $8 returning id',
+			text: 'update challenges set title = $1, description = $2, course_id = $3, answer = $4, is_deleted = $5, type = $6, updated_at = $7 where challenge_id = $8 returning challenge_id',
 			values: [title, description, course_id, answer, is_deleted, type, updated_at, id]
 		}
 
