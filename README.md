@@ -389,12 +389,12 @@ for example: /courses?type=SIBI
 #### Body Payload
 ```json
 {
-    "title": "Huruf X", 
-    "description": "Testing Desc", 
-    "course_id": "PxPJslaKI_tNgDVm", 
-    "answer": "X", 
-    "is_deleted": false, 
-    "type": "BISINDO"
+    "title": "text", 
+    "description": "long text", 
+    "course_id": "text", 
+    "answer": "text", 
+    "is_deleted": "boolean", 
+    "type": "text"
 }
 ```
 #### Success Response
