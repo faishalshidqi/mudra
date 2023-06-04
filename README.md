@@ -148,7 +148,7 @@ for example: /courses?type=SIBI
 }
 ```
 # Manager API
-## How to Replicate
+## How to replicate
 - All commands are done in terminal
 - Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
   <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
@@ -305,6 +305,7 @@ for example: /courses?type=SIBI
 ```
 - POST /kll/courses
 #### Body Payload
+Content-Type: application/json
 ```json
 {
     "title": "text",
@@ -333,6 +334,7 @@ for example: /courses?type=SIBI
 ```
 - POST /kll/challenges
 #### Body Payload
+Content-Type: application/json
 ```json
 {
     "title": "text", 
@@ -362,6 +364,7 @@ for example: /courses?type=SIBI
 ```
 - PUT /kll/courses/{id}
 #### Body Payload
+Content-Type: application/json
 ```json
 {
   "title": "text",
@@ -387,6 +390,7 @@ for example: /courses?type=SIBI
 ```
 - PUT /kll/challenges/{id}
 #### Body Payload
+Content-Type: application/json
 ```json
 {
     "title": "text", 
@@ -441,4 +445,53 @@ for example: /courses?type=SIBI
   "message": "text"
 }
 ```
-
+# Uploads Service API
+## How to replicate
+- All commands are done in terminal
+- Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
+  <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
+- Ensure you have nodejs installed on your machine. Use this command in terminal to ensure the nodejs installation. <br> `node -v`
+  <br> If you haven't installed nodejs, please download it from [here](https://nodejs.org/en/download).
+- After git is installed, clone this repo using this command <br>
+  ```git clone -b uploads-service https://github.com/faishalshidqi/capstone-api```
+- Ensure the cloned directory has a package.json file
+- Install the nodejs dependencies using this command
+  <br>`npm install`
+- Use this command to start the development server
+  <br>`npm run start-dev`
+- Use this command to start the production server
+  <br>`npm run start`
+## Endpoint
+- POST /upload
+#### Body Payload
+Content-Type: multipart/form-data
+```json
+{
+  "file": "image/* file",
+  "foldername": "text"
+}
+```
+#### Success Response (200 OK)
+```json
+{
+  "status": "text",
+  "message": "text",
+  "url": "text"
+}
+```
+#### Another Success Response but resource denies public access
+```json
+{
+  "status": "text",
+  "message": "text",
+  "url": "text",
+  "err": "json"
+}
+```
+#### Fail Response
+```json
+{
+  "status": "text",
+  "message":"text"
+}
+```
