@@ -324,6 +324,7 @@ def trigger(model, image_path):
     response_list = [{'Huruf': label_names[id], 'probability': str(pred[0][id]), 'label_id': str(id)} for id in
                      indices[:top_n]]
     response_dict = {
+        'status': 'success',
         'response': response_list,
     }
     os.remove(image_path)
@@ -353,6 +354,6 @@ def predict():
             pred = trigger(model_American, image_path)
             return jsonify(pred)
         else:
-            return jsonify({"status": "success", "message": "Input tidak valid. Silakan coba lagi."})
+            return jsonify({"status": "fail", "message": "Input tidak valid. Silakan coba lagi."})
     except:
-        raise ValueError(jsonify({"status": "failed", "message": "Tangan Tidak Terdeteksi"}))
+        raise ValueError(jsonify({"status": "fail", "message": "Tangan Tidak Terdeteksi"}))
