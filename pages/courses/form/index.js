@@ -11,6 +11,7 @@ export default function Form() {
 				<NavigationItem href='/courses'>Courses</NavigationItem>
 				<NavigationItem href='/courses/form' isActive>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
+				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<CourseForm className="mr-2"></CourseForm>
 		</Layout>

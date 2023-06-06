@@ -26,6 +26,7 @@ export default function Detail({ course }) {
 				<NavigationItem href='/courses' isActive>Courses</NavigationItem>
 				<NavigationItem href='/courses/form'>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
+				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<DetailCourse className="mr-2" courseData={course}></DetailCourse>
 		</Layout>

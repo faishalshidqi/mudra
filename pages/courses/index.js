@@ -35,6 +35,7 @@ export default function CoursesList({ courseData }) {
 				<NavigationItem href='/courses' isActive>Courses</NavigationItem>
 				<NavigationItem href='/courses/form'>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
+				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<List>
 				{courseData["courses"].map((data) => (

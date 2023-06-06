@@ -12,6 +12,7 @@ export default function EditForm({ course }) {
           <NavigationItem href='/courses'>Courses</NavigationItem>
           <NavigationItem href={`/courses/detail/${course.course_id}`} isActive>Back to Detail Course</NavigationItem>
           <NavigationItem href='/challenges'>Challenges</NavigationItem>
+          <NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
         </Navigation>
         <CourseForm className="mr-2" courseData={course}></CourseForm>
       </Layout>

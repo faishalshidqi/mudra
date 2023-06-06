@@ -21,6 +21,7 @@ export default function Home({ dashboardData }) {
 				<NavigationItem href='/courses'>Courses</NavigationItem>
 				<NavigationItem href='/courses/form'>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges'>Challenges</NavigationItem>
+				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<Dashboard>
 				<DashboardItem>

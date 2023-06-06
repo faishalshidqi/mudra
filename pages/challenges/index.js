@@ -20,6 +20,7 @@ export default function CoursesList({ challengesData }) {
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
 				<NavigationItem href='/challenges' isActive>Challenges</NavigationItem>
+				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<List>
 				{challengesData["challenges"].map((data) => (
