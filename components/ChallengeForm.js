@@ -3,10 +3,11 @@ import FetchApi from "../lib/FetchApi"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import {useRouter} from "next/router";
+import fetchApi from "../lib/FetchApi";
 
 const MySwal = withReactContent(Swal)
 
-export default function ChallengeForm({ courses }) {
+export default function ChallengeForm({ challengeData, courses }) {
     const router = useRouter()
     if(router.isFallback) {
         return (
@@ -20,15 +21,25 @@ export default function ChallengeForm({ courses }) {
             </div>
         )
     }
-    const [data, setData] = useState({
+    const isActive = () => {
+        return challengeData?.is_deleted ? '0' : '1'
+    }
+    const setDataFromProps = () => {
+        return {
+            title: challengeData?.title,
+            description: challengeData?.description,
+            type: challengeData?.type,
+            answer: challengeData?.answer
+        }
+    }
+    const [data, setData] = useState(setDataFromProps() ?? {
         title: "",
-        pictUrl: "",
         description: "",
         type: "Select course first!",
         answer: ""
     })
-    const [selectedRadioOption, setSelectedRadioOption] = useState( "1")
-    const [selectedOption, setSelectedOption] = useState('Default')
+    const [selectedRadioOption, setSelectedRadioOption] = useState( isActive ?? "1")
+    const [selectedOption, setSelectedOption] = useState(challengeData?.course_id ?? 'Default')
     const handleChange = (e) => {
         const value = e.target.value
         setData({
@@ -45,7 +56,7 @@ export default function ChallengeForm({ courses }) {
     const handleCourseValueChange = (e) => {
         const optionValue = e.target.value
         setSelectedOption(optionValue)
-        const selectedCourse = courses['courses'].find((course) => course.course_id === optionValue)
+        const selectedCourse = courses.find((course) => course.course_id === optionValue)
         setData({
             ...data,
             type: selectedCourse.type
@@ -65,6 +76,26 @@ export default function ChallengeForm({ courses }) {
                 answer: data.answer,
                 is_deleted: !(Number(selectedRadioOption)),
             }
+        }
+        if (challengeData) {
+            await fetchApi.editChallengeById(challengeData["challenge_id"], request)
+                .then(() => {
+                    return MySwal.fire({
+                        title: "Success",
+                        text: `Berhasil memperbarui challenge!`,
+                        icon: "success"
+                    }).then(() => {
+                        router.back()
+                    })
+                })
+                .catch((e) => {
+                    return MySwal.fire({
+                        title: "Error",
+                        text: `Gagal memperbarui challenge: ${e}`,
+                        icon: "error"
+                    })
+                })
+            return;
         }
         await FetchApi.addNewChallenge(request)
             .then(({challenge_id}) => {
@@ -125,7 +156,7 @@ export default function ChallengeForm({ courses }) {
                                 >
                                     <option value='Default' disabled>Choose Course</option>
                                     {
-                                        courses['courses'].map(({course_id, title}) => (
+                                        courses.map(({course_id, title}) => (
                                             <option key={course_id} value={course_id}>{title}</option>
                                         ))
                                     }
