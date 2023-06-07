@@ -71,6 +71,16 @@ class CourseManagersHandler {
 		}
 	}
 
+	async getManagedCoursesTitleHandler(){
+		const courses = (await this._service.getAllManagedCoursesTitle()).rows
+		return {
+			status: 'success',
+			data: {
+				courses
+			}
+		}
+	}
+
 	async getManagedCourseByIdHandler(request, h){
 		try {
 			const {id} = request.params

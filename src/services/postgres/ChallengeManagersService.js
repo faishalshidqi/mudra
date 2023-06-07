@@ -27,7 +27,7 @@ class ChallengeManagersService {
 
 	async getManagedChallenges() {
 		const query = {
-			text: 'select * from challenges'
+			text: 'select challenges.*, courses.title as course_title from challenges, courses where challenges.course_id = courses.course_id'
 		}
 
 		const result = await this._pool.query(query)
@@ -36,7 +36,7 @@ class ChallengeManagersService {
 
 	async getManagedChallengeById(id) {
 		const query = {
-			text: 'select * from challenges where challenge_id = $1',
+			text: 'select challenges.*, courses.title as course_title from challenges, courses where challenges.challenge_id = $1 AND challenges.course_id = courses.course_id',
 			values: [id]
 		}
 

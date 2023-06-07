@@ -84,6 +84,15 @@ class CourseManagersService {
 		}
 		return result
 	}
+
+	async getAllManagedCoursesTitle() {
+
+		const result = await this._pool.query('select course_id, title, type from courses');
+		if (!result.rowCount) {
+			throw  new NotFoundError('Courses not found')
+		}
+		return result
+	}
 }
 
 module.exports = CourseManagersService
