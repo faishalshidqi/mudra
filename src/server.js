@@ -1,18 +1,19 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-
-const courses = require('./api/courses/index')
-const CoursesService = require('./services/postgres/CoursesService')
-const challenges = require('./api/challenges')
-const ChallengesService = require('./services/postgres/ChallengesService')
 const ClientError = require('./exceptions/ClientError')
 
-const course_managers = require('./api/course_managers/index')
+const courses = require('./api/courses')
+const CoursesService = require('./services/postgres/CoursesService')
+
+const challenges = require('./api/challenges')
+const ChallengesService = require('./services/postgres/ChallengesService')
+
+const course_managers = require('./api/course_managers')
 const CourseManagersService = require('./services/postgres/CourseManagersService')
 const CourseManagersValidator = require('./validator/course_managers')
 
-const challenge_managers = require('./api/challenge_managers/index')
+const challenge_managers = require('./api/challenge_managers')
 const ChallengeManagersService = require('./services/postgres/ChallengeManagersService')
 const ChallengeManagersValidator = require('./validator/challenge_managers')
 
