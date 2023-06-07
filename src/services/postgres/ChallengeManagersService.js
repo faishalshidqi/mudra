@@ -19,10 +19,10 @@ class ChallengeManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		if (!result.rows[0].challenge_id) {
+		if (!result.rowCount) {
 			throw new InvariantError('Failed adding the challenge')
 		}
-		return result.rows[0].challenge_id
+		return result.rows[0]
 	}
 
 	async getManagedChallenges() {
@@ -31,7 +31,7 @@ class ChallengeManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		return result
+		return result.rows
 	}
 
 	async getManagedChallengeById(id) {
@@ -41,7 +41,10 @@ class ChallengeManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		return result
+		if (!result.rowCount) {
+			throw new NotFoundError('Challenge not found')
+		}
+		return result.rows[0]
 	}
 
 	async editManagedChallengeById(id, {title, description, course_id, answer, is_deleted, type}) {
@@ -53,7 +56,7 @@ class ChallengeManagersService {
 
 		const result = await this._pool.query(query)
 		if (!result.rows.length) {
-			throw new NotFoundError('Cannot update a not found challenge')
+			throw new NotFoundError('Cannot update challenge, id not found')
 		}
 	}
 
@@ -65,7 +68,7 @@ class ChallengeManagersService {
 
 		const result = await this._pool.query(query)
 		if (!result.rows.length) {
-			throw new NotFoundError('Cannot delete not found challenge')
+			throw new NotFoundError('Cannot delete challenge, id not found')
 		}
 	}
 
@@ -78,7 +81,7 @@ class ChallengeManagersService {
 		if (!result.rowCount) {
 			throw new NotFoundError('Challenge not found')
 		}
-		return result
+		return result.rows
 	}
 }
 
