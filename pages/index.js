@@ -2,9 +2,8 @@ import NavigationItem from "../components/NavigationItem"
 import Navigation from "../components/Navigation"
 import Dashboard from "../components/Dashboard"
 import DashboardItem from "../components/DashboardItem"
-import RootLayout from "../components/RootLayout"
+import Layout from "../components/layout"
 import FetchApi from "../lib/FetchApi"
-import Link from "next/link"
 
 export async function getStaticProps() {
 	const dashboardData = await FetchApi.getDashboard()
@@ -16,7 +15,7 @@ export async function getStaticProps() {
 }
 export default function Home({ dashboardData }) {
 	return (
-		<RootLayout>
+		<Layout>
 			<Navigation>
 				<NavigationItem href='/' isActive>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
@@ -26,7 +25,7 @@ export default function Home({ dashboardData }) {
 			</Navigation>
 			<Dashboard>
 				<DashboardItem>
-					<Link href='/challenges' className="hover:shadow-md group rounded-md p-3 shadow-sm text-center">
+					<a href='/challenges' className="hover:shadow-md group rounded-md p-3 shadow-sm text-center">
 						<dl className="grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
 							<div>
 								<dt className="sr-only">Title</dt>
@@ -39,10 +38,10 @@ export default function Home({ dashboardData }) {
 								<dd className="group-hover:text-blue-700">{dashboardData.challenges_total} challenges are live</dd>
 							</div>
 						</dl>
-					</Link>
+					</a>
 				</DashboardItem>
 				<DashboardItem>
-					<Link href='/courses' className="hover:shadow-md group rounded-md p-3 shadow-sm text-center">
+					<a href='/courses' className="hover:shadow-md group rounded-md p-3 shadow-sm text-center">
 						<dl className="grid sm:block lg:grid xl:block grid-cols-2 grid-rows-2 items-center">
 							<div>
 								<dt className="sr-only">Title</dt>
@@ -55,9 +54,9 @@ export default function Home({ dashboardData }) {
 								<dd className="group-hover:text-blue-700">{dashboardData.courses_total} courses are live</dd>
 							</div>
 						</dl>
-					</Link>
+					</a>
 				</DashboardItem>
 			</Dashboard>
-		</RootLayout>
+		</Layout>
 	)
 }
