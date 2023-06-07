@@ -65,34 +65,33 @@ const init = async () => {
 	])
 
 	server.ext('onPreResponse', (request, h) => {
-		const { response } = request
+		const { response } = request;
 		if (response instanceof Error) {
+			const {isServer, message, statusCode} = response;
 			if (response instanceof ClientError) {
 				const newResponse = h.response({
 					status: 'fail',
-					message: response.message
-				})
-				newResponse.code(response.statusCode)
-				return newResponse
+					message: message,
+				});
+				newResponse.code(statusCode);
+				return newResponse;
 			}
-
-			if (!response.isServer) {
-				return h.continue
+			if (!isServer) {
+				return h.continue;
 			}
-
 			const newResponse = h.response({
 				status: 'error',
-				message: 'terjadi kegagalan di server kami'
-			})
-			newResponse.code(500)
-			return newResponse
+				message: 'terjadi kegagalan pada server kami',
+			});
+			newResponse.code(500);
+			return newResponse;
 		}
-		return h.continue
-	})
+		return h.continue;
+	});
 
 	await server.start()
 	// eslint-disable-next-line no-console
 	console.log(`Server's running on ${server.info.uri}`)
 }
 
-init()
+void init()

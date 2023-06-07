@@ -13,15 +13,14 @@ class CoursesHandler {
 				}
 			}
 		}
-		else {
-			const courses = await this._service.getCoursesByType(type)
-			return {
-				status: 'success',
-				data: {
-					courses
-				}
+		const courses = await this._service.getCoursesByType(type)
+		return {
+			status: 'success',
+			data: {
+				courses
 			}
 		}
+
 	}
 
 	async getCourseByIdHandler(request) {

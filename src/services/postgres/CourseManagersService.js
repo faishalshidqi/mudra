@@ -47,6 +47,9 @@ class CourseManagersService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
+		if (!result.rowCount) {
+			throw new NotFoundError('Course not found')
+		}
 		return result.rows[0]
 	}
 
@@ -58,7 +61,7 @@ class CourseManagersService {
 		}
 		const result = await this._pool.query(query)
 		if (!result.rowCount) {
-			throw new NotFoundError('Cannot update a not found course')
+			throw new NotFoundError('Cannot update course, id not found')
 		}
 	}
 
@@ -69,7 +72,7 @@ class CourseManagersService {
 		}
 		const result = await this._pool.query(query)
 		if (!result.rowCount) {
-			throw new NotFoundError('Cannot delete not found course')
+			throw new NotFoundError('Cannot delete course, id not found')
 		}
 	}
 

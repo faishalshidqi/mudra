@@ -14,15 +14,14 @@ class ChallengesHandler {
 				}
 			}
 		}
-		else {
-			const challenges = await this._service.getChallengesByType(type)
-			return {
-				status: 'success',
-				data: {
-					challenges
-				}
+		const challenges = await this._service.getChallengesByType(type)
+		return {
+			status: 'success',
+			data: {
+				challenges
 			}
 		}
+
 	}
 
 	async getChallengeByIdHandler(request, h) {
@@ -30,14 +29,12 @@ class ChallengesHandler {
 
 		const challenge = await this._service.getChallengeById(id)
 
-		const response = h.response({
+		const response = {
 			status: 'success',
 			data: {
 				challenge
 			}
-		})
-		response.code(200)
-
+		}
 		return response
 	}
 }

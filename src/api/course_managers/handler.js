@@ -7,36 +7,17 @@ class CourseManagersHandler {
 	}
 
 	async postManagedCourseHandler(request, h){
-		try {
-			this._validator.validateCourseManagerPayload(request.payload)
-			const {course_id} = await this._service.addManagedCourse(request.payload)
-			const response = h.response({
-				status: 'success',
-				message: 'Course is added successfully',
-				data: {
-					course_id
-				}
-			})
-			response.code(201)
-			return response
-		}
-		catch (error) {
-			if (error instanceof ClientError) {
-				const response = h.response({
-					status: 'failed',
-					message: error.message
-				})
-				response.code(error.statusCode)
-				return response
+		this._validator.validateCourseManagerPayload(request.payload)
+		const {course_id} = await this._service.addManagedCourse(request.payload)
+		const response = h.response({
+			status: 'success',
+			message: 'Course is added successfully',
+			data: {
+				course_id
 			}
-			const response = h.response({
-				status: 'error',
-				// message: 'Sorry for the inconvenience, our server is having an error.'
-				message: error.message
-			})
-			response.code(500)
-			return response
-		}
+		})
+		response.code(201)
+		return response
 	}
 	async getDashboardInfoHandler() {
 		const info = (await this._service.getDashboardInfo()).rows[0]
@@ -57,15 +38,15 @@ class CourseManagersHandler {
 				}
 			}
 		}
-		else {
-			const courses = await this._service.getManagedCoursesByType(type)
-			return {
-				status: 'success',
-				data: {
-					courses
-				}
+
+		const courses = await this._service.getManagedCoursesByType(type)
+		return {
+			status: 'success',
+			data: {
+				courses
 			}
 		}
+
 	}
 
 	async getManagedCoursesInfoHandler(){
@@ -79,92 +60,38 @@ class CourseManagersHandler {
 	}
 
 	async getManagedCourseByIdHandler(request, h){
-		try {
-			const {id} = request.params
-			const course = await this._service.getManagedCourseById(id)
-			return {
-				status: 'success',
-				data: {
-					course
-				}
+		const {id} = request.params
+		const course = await this._service.getManagedCourseById(id)
+		return {
+			status: 'success',
+			data: {
+				course
 			}
 		}
-		catch (error) {
-			if (error instanceof ClientError) {
-				const response = h.response({
-					status: 'failed',
-					message: error.message
-				})
-				response.code(error.statusCode)
-				return response
-			}
-			const response = h.response({
-				status: 'error',
-				message: 'Sorry for the inconvenience, our server is having an error.'
-			})
-			response.code(500)
-			console.error(error)
-			return response
-		}
+
 	}
 
 	async editManagedCourseByIdHandler(request, h) {
-		try {
-			this._validator.validateCourseManagerPayload(request.payload)
-			const {id} = request.params
+		this._validator.validateCourseManagerPayload(request.payload)
+		const {id} = request.params
 
-			await this._service.editManagedCourseById(id, request.payload)
-			return {
-				status: 'success',
-				message: 'Course is successfully altered'
-			}
+		await this._service.editManagedCourseById(id, request.payload)
+		return {
+			status: 'success',
+			message: 'Course is successfully altered'
 		}
-		catch (error) {
-			if (error instanceof ClientError) {
-				const response = h.response({
-					status: 'failed',
-					message: error.message
-				})
-				response.code(error.statusCode)
-				return response
-			}
-			const response = h.response({
-				status: 'error',
-				message: 'Sorry for the inconvenience, our server is having an error.'
-			})
-			response.code(500)
-			console.error(error)
-			return response
-		}
+
 	}
 
 	async deleteManagedCourseByIdHandler(request, h){
-		try {
-			const {id} = request.params
+		const {id} = request.params
 
-			await this._service.deleteManagedCourseById(id)
-			return {
-				status: 'success',
-				message: 'Course is successfully removed'
-			}
+		await this._service.deleteManagedCourseById(id)
+		return {
+			status: 'success',
+			message: 'Course is successfully removed'
 		}
-		catch (error) {
-			if (error instanceof ClientError) {
-				const response = h.response({
-					status: 'failed',
-					message: error.message
-				})
-				response.code(error.statusCode)
-				return response
-			}
-			const response = h.response({
-				status: 'error',
-				message: 'Sorry for the inconvenience, our server is having an error.'
-			})
-			response.code(500)
-			console.error(error)
-			return response
-		}
+
 	}
 }
 
