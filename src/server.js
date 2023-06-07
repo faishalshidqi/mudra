@@ -16,14 +16,15 @@ const challenge_managers = require('./api/challenge_managers/index')
 const ChallengeManagersService = require('./services/postgres/ChallengeManagersService')
 const ChallengeManagersValidator = require('./validator/challenge_managers')
 
-//const uploads = require('./api/uploads/index')
-//const UploadsService = require('./services/uploads/UploadsService')
+const dashboard = require('./api/dashboard');
+const DashboardService = require('./services/postgres/DashboardService')
 
 const init = async () => {
 	const coursesService = new CoursesService()
 	const challengesService = new ChallengesService()
 	const courseManagersService = new CourseManagersService()
 	const challengeManagersService = new ChallengeManagersService()
+	const dashboardService = new DashboardService()
 
 	const server = Hapi.server({
 		port: process.env.PORT,
@@ -60,6 +61,12 @@ const init = async () => {
 			options: {
 				service: challengeManagersService,
 				validator: ChallengeManagersValidator
+			}
+		},
+		{
+			plugin: dashboard,
+			options: {
+				service: dashboardService
 			}
 		}
 	])
