@@ -15,7 +15,8 @@ const upload = async (req, res) => {
         const foldername = req.body.foldername ?? 'courses';
         const bucket = storage.bucket(bucketName);
         const extension = Path.extname(Url.parse(req.file.originalname).pathname);
-        const file = `${foldername}/${req.body.filename}${extension}`;
+        const filename = req.body.filename == null ? req.file.originalname : req.body.filename;
+        const file = `${foldername}/${filename}${extension}`;
         const blob = bucket.file(file);
         const blobstream = blob.createWriteStream({
             resumable: false
