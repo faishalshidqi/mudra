@@ -5,7 +5,7 @@ class ChallengesHandler {
 
 	async getChallengesHandler(request) {
 		const {type} = request.query
-		if (type == null) {
+		if (!type) {
 			const challenges = await this._service.getChallenges()
 			return {
 				status: 'success',

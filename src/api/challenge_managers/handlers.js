@@ -43,8 +43,8 @@ class ChallengeManagersHandler {
 
 	async getManagedChallengesHandler(request) {
 		const {type} = request.query
-		if (type == null) {
-			const challenges = (await this._service.getManagedChallenges()).rows
+		if (!type) {
+			const challenges = await this._service.getManagedChallenges()
 			return {
 				status: 'success',
 				data: {
@@ -53,7 +53,7 @@ class ChallengeManagersHandler {
 			}
 		}
 		else {
-			const challenges = (await this._service.getManagedChallengesByType(type)).rows
+			const challenges = await this._service.getManagedChallengesByType(type)
 			return {
 				status: 'success',
 				data: {
@@ -66,7 +66,7 @@ class ChallengeManagersHandler {
 	async getManagedChallengeByIdHandler(request, h) {
 		try {
 			const {id} = request.params
-			const challenge = ((await this._service.getManagedChallengeById(id)).rows)[0]
+			const challenge = await this._service.getManagedChallengeById(id)
 			return {
 				status: 'success',
 				data: {

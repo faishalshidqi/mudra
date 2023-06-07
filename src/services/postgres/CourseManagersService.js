@@ -27,10 +27,10 @@ class CourseManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		if (!result.rows[0].course_id) {
+		if (!result.rowCount) {
 			throw new InvariantError('Failed adding the course')
 		}
-		return result.rows[0].course_id
+		return result.rows[0]
 	}
 
 	async getManagedCourses() {
@@ -38,7 +38,7 @@ class CourseManagersService {
 			text: 'select * from courses'
 		}
 		const result = await this._pool.query(query)
-		return result
+		return result.rows
 	}
 
 	async getManagedCourseById(id) {
@@ -47,7 +47,7 @@ class CourseManagersService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
-		return result
+		return result.rows[0]
 	}
 
 	async editManagedCourseById(id, {title, sign_pict_link, description, type, is_deleted}){
@@ -57,7 +57,7 @@ class CourseManagersService {
 			values: [title, sign_pict_link, description, type, updated_at, is_deleted, id]
 		}
 		const result = await this._pool.query(query)
-		if (!result.rows.length) {
+		if (!result.rowCount) {
 			throw new NotFoundError('Cannot update a not found course')
 		}
 	}
@@ -68,7 +68,7 @@ class CourseManagersService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
-		if (!result.rows.length) {
+		if (!result.rowCount) {
 			throw new NotFoundError('Cannot delete not found course')
 		}
 	}
@@ -82,16 +82,16 @@ class CourseManagersService {
 		if (!result.rowCount) {
 			throw new NotFoundError('Courses not found')
 		}
-		return result
+		return result.rows
 	}
 
-	async getAllManagedCoursesTitle() {
+	async getAllManagedCoursesInfo() {
 
 		const result = await this._pool.query('select course_id, title, type from courses');
 		if (!result.rowCount) {
 			throw  new NotFoundError('Courses not found')
 		}
-		return result
+		return result.rows
 	}
 }
 

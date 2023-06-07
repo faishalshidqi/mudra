@@ -31,7 +31,7 @@ class ChallengeManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		return result
+		return result.rows
 	}
 
 	async getManagedChallengeById(id) {
@@ -41,7 +41,7 @@ class ChallengeManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		return result
+		return result.rows[0]
 	}
 
 	async editManagedChallengeById(id, {title, description, course_id, answer, is_deleted, type}) {
@@ -78,7 +78,7 @@ class ChallengeManagersService {
 		if (!result.rowCount) {
 			throw new NotFoundError('Challenge not found')
 		}
-		return result
+		return result.rows
 	}
 }
 

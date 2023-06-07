@@ -9,10 +9,7 @@ class CourseManagersHandler {
 	async postManagedCourseHandler(request, h){
 		try {
 			this._validator.validateCourseManagerPayload(request.payload)
-			const {title, sign_pict_link, description, type, is_deleted} = request.payload
-			const course_id = await this._service.addManagedCourse({
-				title, sign_pict_link, description, type, is_deleted
-			})
+			const {course_id} = await this._service.addManagedCourse(request.payload)
 			const response = h.response({
 				status: 'success',
 				message: 'Course is added successfully',
@@ -51,8 +48,8 @@ class CourseManagersHandler {
 
 	async getManagedCoursesHandler(request){
 		const {type} = request.query
-		if (type == null) {
-			const courses = (await this._service.getManagedCourses()).rows
+		if (!type) {
+			const courses = await this._service.getManagedCourses()
 			return {
 				status: 'success',
 				data: {
@@ -61,7 +58,7 @@ class CourseManagersHandler {
 			}
 		}
 		else {
-			const courses = (await this._service.getManagedCoursesByType(type)).rows
+			const courses = await this._service.getManagedCoursesByType(type)
 			return {
 				status: 'success',
 				data: {
@@ -71,8 +68,8 @@ class CourseManagersHandler {
 		}
 	}
 
-	async getManagedCoursesTitleHandler(){
-		const courses = (await this._service.getAllManagedCoursesTitle()).rows
+	async getManagedCoursesInfoHandler(){
+		const courses = await this._service.getAllManagedCoursesInfo()
 		return {
 			status: 'success',
 			data: {
@@ -84,7 +81,7 @@ class CourseManagersHandler {
 	async getManagedCourseByIdHandler(request, h){
 		try {
 			const {id} = request.params
-			const course = ((await this._service.getManagedCourseById(id)).rows)[0]
+			const course = await this._service.getManagedCourseById(id)
 			return {
 				status: 'success',
 				data: {
