@@ -7,7 +7,7 @@ const routes = (handler) => ([
 	{
 		method: 'GET',
 		path: '/challenges/{id}',
-		handler: (request, h) => handler.getChallengeByIdHandler(request, h)
+		handler: (request) => handler.getChallengeByIdHandler(request)
 	}
 ])
 

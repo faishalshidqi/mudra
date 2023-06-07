@@ -12,17 +12,17 @@ const routes = (handler) => [
 	{
 		method: 'GET',
 		path: '/kll/challenges/{id}',
-		handler: (request, h) => handler.getManagedChallengeByIdHandler(request, h)
+		handler: (request) => handler.getManagedChallengeByIdHandler(request)
 	},
 	{
 		method: 'PUT',
 		path: '/kll/challenges/{id}',
-		handler: (request, h) => handler.editManagedChallengeByIdHandler(request, h)
+		handler: (request) => handler.editManagedChallengeByIdHandler(request)
 	},
 	{
 		method: 'DELETE',
 		path: '/kll/challenges/{id}',
-		handler: (request, h) => handler.deleteManagedChallengeByIdHandler(request, h)
+		handler: (request) => handler.deleteManagedChallengeByIdHandler(request)
 	}
 ]
 

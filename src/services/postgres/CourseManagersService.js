@@ -8,14 +8,6 @@ class CourseManagersService {
 		this._pool = new Pool()
 	}
 
-	async getDashboardInfo(){
-		const query = {
-			text: 'select (select count(*) from challenges) as challenges_total, (select (select count(*) from courses) as courses_total)'
-		}
-		const result = await this._pool.query(query)
-		return result
-	}
-
 	async addManagedCourse({title, sign_pict_link, description, type, is_deleted}){
 		const id = nanoid(16)
 		const created_at = new Date().toISOString()
@@ -27,10 +19,10 @@ class CourseManagersService {
 		}
 
 		const result = await this._pool.query(query)
-		if (!result.rows[0].course_id) {
+		if (!result.rowCount) {
 			throw new InvariantError('Failed adding the course')
 		}
-		return result.rows[0].course_id
+		return result.rows[0]
 	}
 
 	async getManagedCourses() {
@@ -38,7 +30,7 @@ class CourseManagersService {
 			text: 'select * from courses'
 		}
 		const result = await this._pool.query(query)
-		return result
+		return result.rows
 	}
 
 	async getManagedCourseById(id) {
@@ -47,7 +39,10 @@ class CourseManagersService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
-		return result
+		if (!result.rowCount) {
+			throw new NotFoundError('Course not found')
+		}
+		return result.rows[0]
 	}
 
 	async editManagedCourseById(id, {title, sign_pict_link, description, type, is_deleted}){
@@ -57,8 +52,8 @@ class CourseManagersService {
 			values: [title, sign_pict_link, description, type, updated_at, is_deleted, id]
 		}
 		const result = await this._pool.query(query)
-		if (!result.rows.length) {
-			throw new NotFoundError('Cannot update a not found course')
+		if (!result.rowCount) {
+			throw new NotFoundError('Cannot update course, id not found')
 		}
 	}
 
@@ -68,8 +63,8 @@ class CourseManagersService {
 			values: [id]
 		}
 		const result = await this._pool.query(query)
-		if (!result.rows.length) {
-			throw new NotFoundError('Cannot delete not found course')
+		if (!result.rowCount) {
+			throw new NotFoundError('Cannot delete course, id not found')
 		}
 	}
 
@@ -82,7 +77,16 @@ class CourseManagersService {
 		if (!result.rowCount) {
 			throw new NotFoundError('Courses not found')
 		}
-		return result
+		return result.rows
+	}
+
+	async getAllManagedCoursesInfo() {
+
+		const result = await this._pool.query('select course_id, title, type from courses');
+		if (!result.rowCount) {
+			throw  new NotFoundError('Courses not found')
+		}
+		return result.rows
 	}
 }
 

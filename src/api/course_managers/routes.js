@@ -1,10 +1,5 @@
 const routes = (handler) => [
 	{
-		method: 'GET',
-		path: '/kll/dashboard',
-		handler: (request, h) => handler.getDashboardInfoHandler(request, h)
-	},
-	{
 		method: 'POST',
 		path: '/kll/courses',
 		handler: (request, h) => handler.postManagedCourseHandler(request, h)
@@ -16,18 +11,23 @@ const routes = (handler) => [
 	},
 	{
 		method: 'GET',
+		path: '/kll/courses/info',
+		handler: () => handler.getManagedCoursesInfoHandler()
+	},
+	{
+		method: 'GET',
 		path: '/kll/courses/{id}',
-		handler: (request, h) => handler.getManagedCourseByIdHandler(request, h)
+		handler: (request) => handler.getManagedCourseByIdHandler(request)
 	},
 	{
 		method: 'PUT',
 		path: '/kll/courses/{id}',
-		handler: (request, h) => handler.editManagedCourseByIdHandler(request, h)
+		handler: (request) => handler.editManagedCourseByIdHandler(request)
 	},
 	{
 		method: 'DELETE',
 		path: '/kll/courses/{id}',
-		handler: (request, h) => handler.deleteManagedCourseByIdHandler(request, h)
+		handler: (request) => handler.deleteManagedCourseByIdHandler(request)
 	},
 ]
 

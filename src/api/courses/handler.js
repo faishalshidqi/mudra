@@ -4,7 +4,7 @@ class CoursesHandler {
 	}
 	async getCoursesHandler(request) {
 		const {type} = request.query
-		if (type == null) {
+		if (!type) {
 			const courses = await this._service.getCourses(type)
 			return {
 				status: 'success',
@@ -13,15 +13,14 @@ class CoursesHandler {
 				}
 			}
 		}
-		else {
-			const courses = await this._service.getCoursesByType(type)
-			return {
-				status: 'success',
-				data: {
-					courses
-				}
+		const courses = await this._service.getCoursesByType(type)
+		return {
+			status: 'success',
+			data: {
+				courses
 			}
 		}
+
 	}
 
 	async getCourseByIdHandler(request) {
@@ -32,15 +31,6 @@ class CoursesHandler {
 			data: {
 				course
 			}
-		}
-	}
-
-	async getCoursesByTypeHandler(request) {
-		const {type} = request.params
-		const courses = await this._service.getCoursesByType(type)
-		return {
-			status: 'success',
-			data: courses
 		}
 	}
 }

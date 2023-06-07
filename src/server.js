@@ -1,29 +1,31 @@
 require('dotenv').config()
 
 const Hapi = require('@hapi/hapi')
-
-const courses = require('./api/courses/index')
-const CoursesService = require('./services/postgres/CoursesService')
-const challenges = require('./api/challenges')
-const ChallengesService = require('./services/postgres/ChallengesService')
 const ClientError = require('./exceptions/ClientError')
 
-const course_managers = require('./api/course_managers/index')
+const courses = require('./api/courses')
+const CoursesService = require('./services/postgres/CoursesService')
+
+const challenges = require('./api/challenges')
+const ChallengesService = require('./services/postgres/ChallengesService')
+
+const course_managers = require('./api/course_managers')
 const CourseManagersService = require('./services/postgres/CourseManagersService')
 const CourseManagersValidator = require('./validator/course_managers')
 
-const challenge_managers = require('./api/challenge_managers/index')
+const challenge_managers = require('./api/challenge_managers')
 const ChallengeManagersService = require('./services/postgres/ChallengeManagersService')
 const ChallengeManagersValidator = require('./validator/challenge_managers')
 
-//const uploads = require('./api/uploads/index')
-//const UploadsService = require('./services/uploads/UploadsService')
+const dashboard = require('./api/dashboard');
+const DashboardService = require('./services/postgres/DashboardService')
 
 const init = async () => {
 	const coursesService = new CoursesService()
 	const challengesService = new ChallengesService()
 	const courseManagersService = new CourseManagersService()
 	const challengeManagersService = new ChallengeManagersService()
+	const dashboardService = new DashboardService()
 
 	const server = Hapi.server({
 		port: process.env.PORT,
@@ -61,38 +63,43 @@ const init = async () => {
 				service: challengeManagersService,
 				validator: ChallengeManagersValidator
 			}
+		},
+		{
+			plugin: dashboard,
+			options: {
+				service: dashboardService
+			}
 		}
 	])
 
 	server.ext('onPreResponse', (request, h) => {
-		const { response } = request
+		const { response } = request;
 		if (response instanceof Error) {
+			const {isServer, message, statusCode} = response;
 			if (response instanceof ClientError) {
 				const newResponse = h.response({
 					status: 'fail',
-					message: response.message
-				})
-				newResponse.code(response.statusCode)
-				return newResponse
+					message: message,
+				});
+				newResponse.code(statusCode);
+				return newResponse;
 			}
-
-			if (!response.isServer) {
-				return h.continue
+			if (!isServer) {
+				return h.continue;
 			}
-
 			const newResponse = h.response({
 				status: 'error',
-				message: 'terjadi kegagalan di server kami'
-			})
-			newResponse.code(500)
-			return newResponse
+				message: 'terjadi kegagalan pada server kami',
+			});
+			newResponse.code(500);
+			return newResponse;
 		}
-		return h.continue
-	})
+		return h.continue;
+	});
 
 	await server.start()
 	// eslint-disable-next-line no-console
 	console.log(`Server's running on ${server.info.uri}`)
 }
 
-init()
+void init()
