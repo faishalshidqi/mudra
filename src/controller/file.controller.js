@@ -1,5 +1,7 @@
 const processFileMiddleware = require('../middleware/upload');
 const { Storage } = require('@google-cloud/storage');
+const Path = require('path');
+const Url = require('url');
 const storage = new Storage({ keyFile: 'mudra-development-e072459cc52d.json' });
 
 
@@ -12,7 +14,8 @@ const upload = async (req, res) => {
         const bucketName = process.env.BUCKET_NAME;
         const foldername = req.body.foldername ?? 'courses';
         const bucket = storage.bucket(bucketName);
-        const file = `${foldername}/${req.file.originalname}`;
+        const extension = Path.extname(Url.parse(req.file.originalname).pathname);
+        const file = `${foldername}/${req.body.filename}${extension}`;
         const blob = bucket.file(file);
         const blobstream = blob.createWriteStream({
             resumable: false
