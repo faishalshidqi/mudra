@@ -2,7 +2,7 @@ import fetchApi from "../../../lib/FetchApi"
 import {useRouter} from "next/router"
 import Navigation from "../../../components/Navigation"
 import NavigationItem from "../../../components/NavigationItem"
-import Layout from "../../../components/layout"
+import RootLayout from "../../../components/RootLayout"
 import DetailCourse from "../../../components/DetailCourse"
 
 export default function Detail({ course }) {
@@ -20,7 +20,7 @@ export default function Detail({ course }) {
 		)
 	}
 	return(
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses' isActive>Courses</NavigationItem>
@@ -29,13 +29,13 @@ export default function Detail({ course }) {
 				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<DetailCourse className="mr-2" courseData={course}></DetailCourse>
-		</Layout>
+		</RootLayout>
 	)
 }
 
 export async function getStaticPaths() {
 	const id = await fetchApi.getCoursesId()
-	const paths = id.map((id) => ({params: {id: id}}));
+	const paths = id.map((id) => ({params: {id: id}}))
 	return {
 		paths,
 		fallback: false,

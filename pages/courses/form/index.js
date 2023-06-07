@@ -1,11 +1,11 @@
 import Navigation from "../../../components/Navigation"
 import NavigationItem from "../../../components/NavigationItem"
-import Layout from "../../../components/layout"
+import RootLayout from "../../../components/RootLayout"
 import CourseForm from "../../../components/CourseForm"
 
 export default function Form() {
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
@@ -14,6 +14,6 @@ export default function Form() {
 				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<CourseForm className="mr-2"></CourseForm>
-		</Layout>
+		</RootLayout>
 	)
 }
