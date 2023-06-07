@@ -1,5 +1,3 @@
-const ClientError = require('../../exceptions/ClientError')
-
 class CourseManagersHandler {
 	constructor(service, validator) {
 		this._service = service
@@ -52,7 +50,7 @@ class CourseManagersHandler {
 		}
 	}
 
-	async getManagedCourseByIdHandler(request, h){
+	async getManagedCourseByIdHandler(request){
 		const {id} = request.params
 		const course = await this._service.getManagedCourseById(id)
 		return {
@@ -64,7 +62,7 @@ class CourseManagersHandler {
 
 	}
 
-	async editManagedCourseByIdHandler(request, h) {
+	async editManagedCourseByIdHandler(request) {
 		this._validator.validateCourseManagerPayload(request.payload)
 		const {id} = request.params
 
@@ -76,7 +74,7 @@ class CourseManagersHandler {
 
 	}
 
-	async deleteManagedCourseByIdHandler(request, h){
+	async deleteManagedCourseByIdHandler(request){
 		const {id} = request.params
 
 		await this._service.deleteManagedCourseById(id)

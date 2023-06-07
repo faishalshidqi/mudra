@@ -1,5 +1,5 @@
 class DashboardHandler{
-    constructor(service, validator) {
+    constructor(service) {
         this._service = service
     }
 

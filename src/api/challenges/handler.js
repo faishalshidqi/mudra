@@ -24,18 +24,17 @@ class ChallengesHandler {
 
 	}
 
-	async getChallengeByIdHandler(request, h) {
+	async getChallengeByIdHandler(request) {
 		const { id } = request.params
 
 		const challenge = await this._service.getChallengeById(id)
 
-		const response = {
+		return {
 			status: 'success',
 			data: {
 				challenge
 			}
 		}
-		return response
 	}
 }
 
