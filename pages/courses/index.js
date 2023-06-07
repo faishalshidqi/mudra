@@ -1,10 +1,11 @@
-import Layout from "../../components/Layout"
+import RootLayout from "../../components/RootLayout"
 import ListItem from "../../components/ListItem"
 import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
 import Navigation from "../../components/Navigation"
 import fetchApi from "../../lib/FetchApi"
 import {useRouter} from "next/router"
+
 
 export async function getStaticProps() {
 	const courseData = await fetchApi.getAllCourses()
@@ -29,7 +30,7 @@ export default function CoursesList({ courseData }) {
 		)
 	}
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses' isActive>Courses</NavigationItem>
@@ -42,6 +43,6 @@ export default function CoursesList({ courseData }) {
 					<ListItem key={data.course_id} context={data} />
 				))}
 			</List>
-		</Layout>
+		</RootLayout>
 	)
 }

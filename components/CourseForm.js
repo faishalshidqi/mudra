@@ -2,8 +2,8 @@ import {useState} from "react"
 import fetchApi from "../lib/FetchApi"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
-import Link from "next/link";
-import {useRouter} from "next/router";
+import Link from "next/link"
+import {useRouter} from "next/router"
 
 const MySwal = withReactContent(Swal)
 
@@ -11,7 +11,7 @@ export default function CourseForm({courseData}) {
 
 	const router = useRouter()
 	const isActive = () => {
-		return courseData?.is_deleted ? '0' : '1'
+		return courseData?.is_deleted ? "0" : "1"
 	}
 	const setDataFromProps = () => {
 		return {
@@ -29,7 +29,7 @@ export default function CourseForm({courseData}) {
 	})
 	const setFileUrlFromProps = () => {
 		if (courseData) return (
-			<Link href={courseData?.sign_pict_link} target='_blank'>{courseData?.sign_pict_link.split('/')[5]}</Link>
+			<Link href={courseData?.sign_pict_link} target='_blank'>{courseData?.sign_pict_link.split("/")[5]}</Link>
 		)
 	}
 	const [selectedRadioOption, setSelectedRadioOption] = useState( isActive() ?? "1")
@@ -87,7 +87,7 @@ export default function CourseForm({courseData}) {
 				return url
 			})
 			.catch((e) => {
-				return e;
+				return e
 			})
 	}
 
@@ -111,7 +111,7 @@ export default function CourseForm({courseData}) {
 				.then(() => {
 					return MySwal.fire({
 						title: "Success",
-						text: `Berhasil memperbarui course!`,
+						text: "Berhasil memperbarui course!",
 						icon: "success"
 					}).then(() => {
 						router.back()
@@ -124,10 +124,10 @@ export default function CourseForm({courseData}) {
 						icon: "error"
 					})
 				})
-			return;
+			return
 		}
 
-		const pictUrl = await handleUpload(e);
+		const pictUrl = await handleUpload(e)
 		const request = {
 			body: {
 				title: data.title,
@@ -156,11 +156,11 @@ export default function CourseForm({courseData}) {
 			})
 	}
 	const handleClickButton = (e) => {
-		e.preventDefault();
+		e.preventDefault()
 		if (window.history.length > 1) {
-			router.back();
+			router.back()
 		} else {
-			void router.push('/courses');
+			void router.push("/courses")
 		}
 	}
 	return (
@@ -254,7 +254,7 @@ export default function CourseForm({courseData}) {
 										name="isActive"
 										type="radio"
 										className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
-										value={'1'}
+										value={"1"}
 										checked={selectedRadioOption === "1"}
 										onChange={handleRadioValueChange}
 									/>

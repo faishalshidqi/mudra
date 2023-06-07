@@ -3,16 +3,16 @@ import Date from "./Date"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import fetchApi from "../lib/FetchApi"
-import {useRouter} from "next/router";
+import {useRouter} from "next/router"
 const MySwal = withReactContent(Swal)
 
 export default function DetailCourse({ courseData: {course_id: id, created_at, description, sign_pict_link, title, type, updated_at} }) {
 	const router = useRouter()
 
 	const handleRedirect = (e) => {
-		e.preventDefault();
+		e.preventDefault()
 
-		void router.push(`/courses/detail/${id}/form`);
+		void router.push(`/courses/detail/${id}/form`)
 	}
 	const handleDelete = () => {
 		return MySwal.fire({
