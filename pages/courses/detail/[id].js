@@ -35,7 +35,7 @@ export default function Detail({ course }) {
 
 export async function getStaticPaths() {
 	const id = await fetchApi.getCoursesId()
-	const paths = id.map((id) => ({params: {id: id}}));
+	const paths = id.map((id) => ({params: {id: id}}))
 	return {
 		paths,
 		fallback: false,
