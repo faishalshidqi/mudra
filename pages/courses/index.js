@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout"
+import Layout from "../../components/RootLayout"
 import ListItem from "../../components/ListItem"
 import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
@@ -27,7 +27,7 @@ export default function CoursesList() {
 			<Loading />
 		)
 	}
-	if (!data || error) {
+	if (data || error) {
 		return (
 			<Custom404 message="Can't found any Courses data"></Custom404>
 		)
