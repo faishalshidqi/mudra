@@ -206,6 +206,29 @@ for example: /courses?type=SIBI
   "message": "text"
 }
 ```
+- GET /kll/courses/info
+#### Success Response (200 OK)
+```json
+{
+    "status": "text",
+    "data": {
+        "courses": [
+            {
+                "course_id": "text",
+                "title": "text",
+                "type": "text"
+            }
+        ]
+    }
+}
+```
+#### Fail Response (404 Not Found)
+```json
+{
+  "status": "text",
+  "message": "text"
+}
+```
 - GET /kll/courses/{id}
 #### Success Response (200 OK)
 ```json
@@ -468,7 +491,8 @@ Content-Type: multipart/form-data
 ```json
 {
   "file": "image/* file",
-  "foldername": "text"
+  "foldername": "text",
+  "filename": "text"
 }
 ```
 #### Success Response (200 OK)
