@@ -1,12 +1,12 @@
 import Navigation from "../../../../components/Navigation"
 import NavigationItem from "../../../../components/NavigationItem"
-import Layout from "../../../../components/layout"
+import RootLayout from "../../../../components/RootLayout"
 import ChallengeForm from "../../../../components/ChallengeForm"
 import fetchApi from "../../../../lib/FetchApi"
 
 export default function EditForm({ challenge, courses }) {
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
@@ -14,7 +14,7 @@ export default function EditForm({ challenge, courses }) {
 				<NavigationItem href={`/courses/detail/${challenge.challenge_id}`} isActive>Back to Detail Challenge</NavigationItem>
 			</Navigation>
 			<ChallengeForm className="mr-2" challengeData={challenge} courses={courses}></ChallengeForm>
-		</Layout>
+		</RootLayout>
 	)
 }
 export async function getStaticPaths() {

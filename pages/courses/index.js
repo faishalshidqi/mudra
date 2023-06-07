@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout"
+import RootLayout from "../../components/RootLayout"
 import ListItem from "../../components/ListItem"
 import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
@@ -29,7 +29,7 @@ export default function CoursesList({ courseData }) {
 		)
 	}
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses' isActive>Courses</NavigationItem>
@@ -42,6 +42,6 @@ export default function CoursesList({ courseData }) {
 					<ListItem key={data.course_id} context={data} />
 				))}
 			</List>
-		</Layout>
+		</RootLayout>
 	)
 }

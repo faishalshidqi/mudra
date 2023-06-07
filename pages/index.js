@@ -2,7 +2,7 @@ import NavigationItem from "../components/NavigationItem"
 import Navigation from "../components/Navigation"
 import Dashboard from "../components/Dashboard"
 import DashboardItem from "../components/DashboardItem"
-import Layout from "../components/layout"
+import RootLayout from "../components/RootLayout"
 import FetchApi from "../lib/FetchApi"
 import Link from "next/link"
 
@@ -16,7 +16,7 @@ export async function getStaticProps() {
 }
 export default function Home({ dashboardData }) {
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/' isActive>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
@@ -58,6 +58,6 @@ export default function Home({ dashboardData }) {
 					</Link>
 				</DashboardItem>
 			</Dashboard>
-		</Layout>
+		</RootLayout>
 	)
 }

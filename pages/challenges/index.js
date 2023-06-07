@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout"
+import RootLayout from "../../components/RootLayout"
 import ListItem from "../../components/ListItem"
 import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
@@ -15,7 +15,7 @@ export async function getStaticProps() {
 }
 export default function CoursesList({ challengesData }) {
 	return (
-		<Layout>
+		<RootLayout>
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
@@ -28,6 +28,6 @@ export default function CoursesList({ challengesData }) {
 				))}
 			</List>
 
-		</Layout>
+		</RootLayout>
 	)
 }
