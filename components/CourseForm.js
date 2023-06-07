@@ -186,11 +186,12 @@ export default function CourseForm({courseData}) {
 						</div>
 						<div className="col-span-full">
 							<label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-white">
-								Course Image
+                  Course Image
 							</label>
 							<div
 								className="mt-2 flex justify-center rounded-lg border border-dashed border-white px-6 py-10"
-								id="upload-container">
+								id="upload-container"
+							>
 								<div className="text-center">
 									<svg className="mx-auto h-12 w-12 text-white" viewBox="0 0 24 24"
 										fill="currentColor" aria-hidden="true">
@@ -213,7 +214,7 @@ export default function CourseForm({courseData}) {
 						</div>
 						<div className="col-span-full">
 							<label htmlFor="description" className="block text-sm font-medium leading-6 text-white">
-								Description
+                  Description
 							</label>
 							<div className="mt-2">
 								<textarea
@@ -234,7 +235,8 @@ export default function CourseForm({courseData}) {
 									autoComplete="course-type"
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 									onChange={handleOptionValueChange}
-									value={selectedOption}>
+									value={selectedOption}
+								>
 									<option value='Default' disabled>Choose Course Type</option>
 									<option value='SIBI'>SIBI</option>
 									<option value='BISINDO'>BISINDO</option>

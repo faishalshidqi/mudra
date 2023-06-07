@@ -5,7 +5,7 @@ import ChallengeForm from "../../../components/ChallengeForm"
 import FetchApi from "../../../lib/FetchApi"
 
 export async function getStaticProps() {
-	const { courses } =  await FetchApi.getCoursesInfo()
+	const { courses     } =  await FetchApi.getCoursesInfo()
 	return {
 		props: {
 			courses

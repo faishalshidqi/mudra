@@ -32,16 +32,13 @@ export default function ChallengeForm({ challengeData, courses }) {
 			answer: challengeData?.answer
 		}
 	}
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [data, setData] = useState(setDataFromProps() ?? {
 		title: "",
 		description: "",
 		type: "Select course first!",
 		answer: ""
 	})
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [selectedRadioOption, setSelectedRadioOption] = useState( isActive ?? "1")
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [selectedOption, setSelectedOption] = useState(challengeData?.course_id ?? "Default")
 	const handleChange = (e) => {
 		const value = e.target.value
@@ -196,7 +193,6 @@ export default function ChallengeForm({ challengeData, courses }) {
 						</div>
 						<div className="sm:col-span-3">
 							<label htmlFor="answer" className="block text-sm font-medium leading-6 text-white">
-								{/* eslint-disable-next-line react/no-unescaped-entities */}
                                 Challenge's Answer
 							</label>
 							<div className="mt-2">
