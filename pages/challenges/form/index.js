@@ -3,16 +3,32 @@ import NavigationItem from "../../../components/NavigationItem"
 import RootLayout from "../../../components/RootLayout"
 import ChallengeForm from "../../../components/ChallengeForm"
 import FetchApi from "../../../lib/FetchApi"
+import useSWR from "swr";
+import fetchApi from "../../../lib/FetchApi";
+import Custom404Page from "../../../components/Custom404Page";
+import Loading from "../../../components/Loading";
 
-export async function getStaticProps() {
-	const { courses     } =  await FetchApi.getCoursesInfo()
-	return {
-		props: {
-			courses
-		}
+// export async function getStaticProps() {
+// 	const { courses     } =  await FetchApi.getCoursesInfo()
+// 	return {
+// 		props: {
+// 			courses
+// 		}
+// 	}
+// }
+export default function Form() {
+	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/courses/info`, fetchApi.getCoursesInfo)
+	if (isLoading) {
+		return (
+			<Loading />
+		)
 	}
-}
-export default function Form({courses}) {
+	if (!data && error) {
+		return (
+			<Custom404Page message="Cannot get required data." />
+		)
+	}
+	const {courses} = data
 	return (
 		<RootLayout>
 			<Navigation>

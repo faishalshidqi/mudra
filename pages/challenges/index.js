@@ -4,16 +4,32 @@ import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
 import Navigation from "../../components/Navigation"
 import fetchApi from "../../lib/FetchApi"
+import useSWR from "swr";
+import Custom404Page from "../../components/Custom404Page";
+import Loading from "../../components/Loading";
 
-export async function getStaticProps() {
-	const challengesData = await fetchApi.getAllChallenges()
-	return {
-		props: {
-			challengesData
-		}
+// export async function getStaticProps() {
+// 	const challengesData = await fetchApi.getAllChallenges()
+// 	return {
+// 		props: {
+// 			challengesData
+// 		}
+// 	}
+// }
+export default function CoursesList() {
+	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/challenges`, fetchApi.getAllChallenges)
+
+	if (isLoading) {
+		return (
+			<Loading />
+		)
 	}
-}
-export default function CoursesList({ challengesData }) {
+	if (!data && error) {
+		return (
+			<Custom404Page message="Can't found any Courses data" />
+		)
+	}
+	const {challenges} = data
 	return (
 		<RootLayout>
 			<Navigation>
@@ -23,8 +39,8 @@ export default function CoursesList({ challengesData }) {
 				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<List>
-				{challengesData["challenges"].map((data) => (
-					<ListItem key={data.challenge_id} context={data} />
+				{challenges.map((challenge) => (
+					<ListItem key={challenge.challenge_id} context={challenge} />
 				))}
 			</List>
 
