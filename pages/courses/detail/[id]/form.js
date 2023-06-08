@@ -3,8 +3,27 @@ import NavigationItem from "../../../../components/NavigationItem"
 import RootLayout from "../../../../components/RootLayout"
 import CourseForm from "../../../../components/CourseForm"
 import fetchApi from "../../../../lib/FetchApi"
+import {useRouter} from "next/router"
+import useSWR from "swr";
+import Loading from "../../../../components/Loading";
+import Custom404Page from "../../../../components/Custom404Page";
+export default function EditForm() {
+	const router = useRouter()
+	const {id} = router.query
+	const {data, error, isLoading} = useSWR(`${id}`, fetchApi.getCoursesById)
 
-export default function EditForm({ course }) {
+	if (isLoading) {
+		return (
+			<Loading />
+		)
+	}
+
+	if (!data && error) {
+		return (
+			<Custom404Page message="Cannot get course data. ID not found"/>
+		)
+	}
+	const {course} = data
 	return (
 		<RootLayout>
 			<Navigation>
@@ -17,20 +36,4 @@ export default function EditForm({ course }) {
 			<CourseForm className="mr-2" courseData={course}></CourseForm>
 		</RootLayout>
 	)
-}
-export async function getStaticPaths() {
-	const id = await fetchApi.getCoursesId()
-	const paths = id.map((id) => ({params: {id: id}}))
-	return {
-		paths,
-		fallback: false,
-	}
-}
-export async function getStaticProps({ params }){
-	const { course } = await fetchApi.getCoursesById(params.id)
-	return {
-		props: {
-			course: course ?? null
-		}
-	}
 }
