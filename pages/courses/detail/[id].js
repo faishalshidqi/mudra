@@ -4,21 +4,25 @@ import Navigation from "../../../components/Navigation"
 import NavigationItem from "../../../components/NavigationItem"
 import RootLayout from "../../../components/RootLayout"
 import DetailCourse from "../../../components/DetailCourse"
+import useSWR from "swr"
+import Loading from "../../../components/Loading";
+import Custom404Page from "../../../components/Custom404Page";
 
-export default function Detail({ course }) {
+export default function Detail() {
 	const router = useRouter()
-	if(router.isFallback) {
+	const {id} = router.query
+	const { data, error, isLoading } = useSWR(`${id}`, fetchApi.getCoursesById)
+	if (!data && error) {
 		return (
-			<div
-				className="m-56 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-				role="status">
-				<span
-					className=" !absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                      Loading...
-				</span>
-			</div>
+			<Custom404Page message="Cannot get course data. ID not found" />
 		)
 	}
+	if (isLoading) {
+		return (
+			<Loading />
+		)
+	}
+	const {course} = data
 	return(
 		<RootLayout>
 			<Navigation>
@@ -33,19 +37,19 @@ export default function Detail({ course }) {
 	)
 }
 
-export async function getStaticPaths() {
-	const id = await fetchApi.getCoursesId()
-	const paths = id.map((id) => ({params: {id: id}}))
-	return {
-		paths,
-		fallback: false,
-	}
-}
-export async function getStaticProps({ params }){
-	const { course } = await fetchApi.getCoursesById(params.id)
-	return {
-		props: {
-			course: course ?? null
-		}
-	}
-}
+// export async function getStaticPaths() {
+// 	const id = await fetchApi.getCoursesId()
+// 	const paths = id.map((id) => ({params: {id: id}}))
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	}
+// }
+// export async function getStaticProps({ params }){
+// 	const { course } = await fetchApi.getCoursesById(params.id)
+// 	return {
+// 		props: {
+// 			course: course ?? null
+// 		}
+// 	}
+// }

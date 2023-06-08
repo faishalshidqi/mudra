@@ -5,8 +5,8 @@ import NavigationItem from "../../components/NavigationItem"
 import Navigation from "../../components/Navigation"
 import fetchApi from "../../lib/FetchApi"
 import {useRouter} from "next/router"
-import useSWR from 'swr'
-import Custom404 from "../../components/Custom404";
+import useSWR from "swr"
+import Custom404Page from "../../components/Custom404Page";
 import Loading from "../../components/Loading";
 
 // export async function getStaticProps() {
@@ -27,9 +27,9 @@ export default function CoursesList() {
 			<Loading />
 		)
 	}
-	if (data || error) {
+	if (!data && error) {
 		return (
-			<Custom404 message="Can't found any Courses data"></Custom404>
+			<Custom404Page message="Can't found any Courses data" />
 		)
 	}
 	return (
