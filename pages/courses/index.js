@@ -4,24 +4,12 @@ import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
 import Navigation from "../../components/Navigation"
 import fetchApi from "../../lib/FetchApi"
-import {useRouter} from "next/router"
 import useSWR from "swr"
 import Custom404Page from "../../components/Custom404Page";
 import Loading from "../../components/Loading";
-
-// export async function getStaticProps() {
-// 	// const courseData = await fetchApi.getAllCourses()
-//
-// 	return {
-// 		props: {
-// 			courseData
-// 		}
-// 	}
-// }
 export default function CoursesList() {
 	const { data, error, isLoading } = useSWR(`${process.env.API_URL}/kll/courses`, fetchApi.getAllCourses)
 
-	const router = useRouter()
 	if (isLoading) {
 		return (
 			<Loading />

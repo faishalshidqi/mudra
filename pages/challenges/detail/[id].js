@@ -37,20 +37,3 @@ export default function Detail() {
 		</RootLayout>
 	)
 }
-
-// export async function getStaticPaths() {
-// 	const id = await fetchApi.getChallengesId()
-// 	const paths = id.map((id) => ({params: {id: id}}))
-// 	return {
-// 		paths,
-// 		fallback: false,
-// 	}
-// }
-// export async function getStaticProps({ params }){
-// 	const { challenge } = await fetchApi.getChallengeById(params.id)
-// 	return {
-// 		props: {
-// 			challenge: challenge ?? null
-// 		}
-// 	}
-// }

@@ -36,20 +36,3 @@ export default function Detail() {
 		</RootLayout>
 	)
 }
-
-// export async function getStaticPaths() {
-// 	const id = await fetchApi.getCoursesId()
-// 	const paths = id.map((id) => ({params: {id: id}}))
-// 	return {
-// 		paths,
-// 		fallback: false,
-// 	}
-// }
-// export async function getStaticProps({ params }){
-// 	const { course } = await fetchApi.getCoursesById(params.id)
-// 	return {
-// 		props: {
-// 			course: course ?? null
-// 		}
-// 	}
-// }
