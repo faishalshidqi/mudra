@@ -48,11 +48,11 @@ export default function DetailCourse({ courseData: {course_id: id, created_at, d
 	return (
 		<div className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
 			<div className="px-4 sm:px-0">
-				<h3 className="text-base font-semibold leading-7 text-white">Course Detail</h3>
+				<h3 className="text-base font-semibold leading-7">Course Detail</h3>
 				<div className="mt-5 flex lg:ml-4 lg:mt-0 py-2">
 					<span className="sm:block">
 						<button type="button"
-							className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+							className="inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-500 hover:bg-auto"
 							onClick={handleRedirect}
 						>
 							<svg className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
@@ -77,30 +77,30 @@ export default function DetailCourse({ courseData: {course_id: id, created_at, d
 			<div className="mt-6 border-t border-gray-100">
 				<dl className="divide-y divide-gray-100">
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Course Title</dt>
-						<dd className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0">{title}</dd>
+						<dt className="text-sm font-medium leading-6">Course Title</dt>
+						<dd className="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">{title}</dd>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Course Type</dt>
-						<dd className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0">{type}</dd>
+						<dt className="text-sm font-medium leading-6">Course Type</dt>
+						<dd className="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">{type}</dd>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Created At</dt>
+						<dt className="text-sm font-medium leading-6">Created At</dt>
 						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={created_at}></Date>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Updated At</dt>
+						<dt className="text-sm font-medium leading-6">Updated At</dt>
 						<Date className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0" dateString={updated_at}></Date>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Course Description</dt>
-						<dd className="mt-1 text-sm leading-6 text-white sm:col-span-2 sm:mt-0">
+						<dt className="text-sm font-medium leading-6">Course Description</dt>
+						<dd className="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
 							{description}
 						</dd>
 					</div>
 					<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-						<dt className="text-sm font-medium leading-6 text-white">Attachments</dt>
-						<dd className="mt-2 text-sm text-white sm:col-span-2 sm:mt-0">
+						<dt className="text-sm font-medium leading-6">Attachments</dt>
+						<dd className="mt-2 text-sm sm:col-span-2 sm:mt-0">
 							<ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
 								<li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
 									<div className="flex w-0 flex-1 items-center">
