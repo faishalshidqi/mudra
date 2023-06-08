@@ -32,13 +32,16 @@ export default function ChallengeForm({ challengeData, courses }) {
 			answer: challengeData?.answer
 		}
 	}
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [data, setData] = useState(setDataFromProps() ?? {
 		title: "",
 		description: "",
 		type: "Select course first!",
 		answer: ""
 	})
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [selectedRadioOption, setSelectedRadioOption] = useState( isActive ?? "1")
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [selectedOption, setSelectedOption] = useState(challengeData?.course_id ?? "Default")
 	const handleChange = (e) => {
 		const value = e.target.value
@@ -127,10 +130,10 @@ export default function ChallengeForm({ challengeData, courses }) {
 		<form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
 			<div className="space-y-12 space-x-5">
 				<div className="border-b border-white-900/10 pb-12">
-					<h2 className="text-base font-semibold leading-7 text-white">Add new challenge</h2>
+					<h2 className="text-base font-semibold leading-7">Add new challenge</h2>
 					<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 						<div className="sm:col-span-3">
-							<label htmlFor="title" className="block text-sm font-medium leading-6 text-white">
+							<label htmlFor="title" className="block text-sm font-medium leading-6">
                                 Title
 							</label>
 							<div className="mt-2">
@@ -146,7 +149,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 						</div>
 						<div className="sm:col-span-full">
 							<label htmlFor="courseId"
-								className="block text-sm font-medium leading-6 text-white">Course Name</label>
+								className="block text-sm font-medium leading-6">Course Name</label>
 							<div className="mt-2">
 								<select id="courseId"
 									name="courseId"
@@ -164,7 +167,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 							</div>
 						</div>
 						<div className="col-span-full">
-							<label htmlFor="description" className="block text-sm font-medium leading-6 text-white">
+							<label htmlFor="description" className="block text-sm font-medium leading-6">
                                 Description
 							</label>
 							<div className="mt-2">
@@ -179,7 +182,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 						</div>
 						<div className="sm:col-span-full">
 							<label htmlFor="type"
-								className="block text-sm font-medium leading-6 text-white">Course Type</label>
+								className="block text-sm font-medium leading-6">Course Type</label>
 							<div className="mt-2">
 								<input
 									type="text"
@@ -192,7 +195,8 @@ export default function ChallengeForm({ challengeData, courses }) {
 							</div>
 						</div>
 						<div className="sm:col-span-3">
-							<label htmlFor="answer" className="block text-sm font-medium leading-6 text-white">
+							<label htmlFor="answer" className="block text-sm font-medium leading-6">
+								{/* eslint-disable-next-line react/no-unescaped-entities */}
                                 Challenge's Answer
 							</label>
 							<div className="mt-2">
@@ -208,7 +212,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 							</div>
 						</div>
 						<fieldset>
-							<legend className="text-sm font-semibold leading-6 text-white">Is this challenge active?
+							<legend className="text-sm font-semibold leading-6">Is this challenge active?
 							</legend>
 							<div className="mt-6 space-y-6">
 								<div className="flex items-center gap-x-3">
@@ -222,7 +226,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 										onChange={handleRadioValueChange}
 									/>
 									<label htmlFor="active"
-										className="block text-sm font-medium leading-6 text-white">Yes</label>
+										className="block text-sm font-medium leading-6">Yes</label>
 								</div>
 								<div className="flex items-center gap-x-3">
 									<input
@@ -235,7 +239,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 										onChange={handleRadioValueChange}
 									/>
 									<label htmlFor="notActive"
-										className="block text-sm font-medium leading-6 text-white">No</label>
+										className="block text-sm font-medium leading-6">No</label>
 								</div>
 							</div>
 						</fieldset>
