@@ -73,7 +73,6 @@ export default function CourseForm({courseData}) {
 
 		formData.append(e.target.name, e.target.files[0])
 		const filename = data.title.replace(/\s/g, `_`)
-		console.log(filename)
 		formData.append('filename', filename)
 		setFilename(formData.get(e.target.name).name)
 		setFile(formData)
