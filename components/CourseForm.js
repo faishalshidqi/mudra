@@ -8,7 +8,7 @@ import {useRouter} from "next/router"
 const MySwal = withReactContent(Swal)
 
 export default function CourseForm({courseData}) {
-
+	const formData = new FormData()
 	const router = useRouter()
 	const isActive = () => {
 		return courseData?.is_deleted ? "0" : "1"
@@ -70,8 +70,11 @@ export default function CourseForm({courseData}) {
 			setFilename("")
 			return
 		}
-		const formData = new FormData()
+
 		formData.append(e.target.name, e.target.files[0])
+		const filename = data.title.replace(/\s/g, `_`)
+		console.log(filename)
+		formData.append('filename', filename)
 		setFilename(formData.get(e.target.name).name)
 		setFile(formData)
 		setIsFileUploadHandlerInvoked(true)
@@ -167,7 +170,7 @@ export default function CourseForm({courseData}) {
 		<form onSubmit={handleSubmit} className='p-4 sm:px-8 sm:pt-6 sm:pb-8 lg:p-4 xl:px-8 xl:pt-6 xl:pb-8'>
 			<div className="space-y-12 space-x-5">
 				<div className="border-b border-white-900/10 pb-12">
-					<h2 className="text-base font-semibold leading-7">Add new course</h2>
+					<h2 className="text-base font-semibold leading-7">{courseData ? `Edit ${courseData.title} course` : 'Add new course'}</h2>
 					<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 						<div className="sm:col-span-3">
 							<label htmlFor="title" className="block text-sm font-medium leading-6">
