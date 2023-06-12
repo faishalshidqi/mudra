@@ -18,6 +18,7 @@ export default function CourseForm({courseData}) {
 			title: courseData?.title,
 			pictUrl: courseData?.sign_pict_link,
 			description: courseData?.description,
+			type: courseData?.type,
 			isActive: isActive(),
 		}
 	}
@@ -72,7 +73,7 @@ export default function CourseForm({courseData}) {
 		}
 
 		formData.append(e.target.name, e.target.files[0])
-		const filename = data.title.replace(/\s/g, "_")
+		const filename = `${data.title}_${data.type}`
 		formData.append("filename", filename)
 		setFilename(formData.get(e.target.name).name)
 		setFile(formData)
