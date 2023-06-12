@@ -13,7 +13,7 @@ dotenv.load_dotenv('.env')
 app = Flask(__name__)
 cors = CORS(app)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-model_Bisindo = keras.models.load_model('model_Bisindo_new1.h5')
+model_Bisindo = keras.models.load_model('model_Bisindo_FIX.h5')
 model_SIBI = keras.models.load_model('model_sibi_new.h5')
 model_American = keras.models.load_model('model_ASL.h5')
 label_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
