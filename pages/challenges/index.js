@@ -4,9 +4,9 @@ import List from "../../components/List"
 import NavigationItem from "../../components/NavigationItem"
 import Navigation from "../../components/Navigation"
 import fetchApi from "../../lib/FetchApi"
-import useSWR from "swr";
-import Custom404Page from "../../components/Custom404Page";
-import Loading from "../../components/Loading";
+import useSWR from "swr"
+import Custom404Page from "../../components/Custom404Page"
+import Loading from "../../components/Loading"
 
 export default function CoursesList() {
 	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/challenges`, fetchApi.getAllChallenges)
@@ -32,7 +32,7 @@ export default function CoursesList() {
 			</Navigation>
 			<List>
 				{challenges.map((challenge) => (
-						<ListItem key={challenge["challenge_id"]} context={challenge}/>
+					<ListItem key={challenge["challenge_id"]} context={challenge}/>
 				))}
 			</List>
 

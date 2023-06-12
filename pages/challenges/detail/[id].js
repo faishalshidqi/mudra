@@ -4,9 +4,9 @@ import Navigation from "../../../components/Navigation"
 import NavigationItem from "../../../components/NavigationItem"
 import RootLayout from "../../../components/RootLayout"
 import DetailChallenge from "../../../components/DetailChallenge"
-import useSWR from "swr";
-import Custom404Page from "../../../components/Custom404Page";
-import Loading from "../../../components/Loading";
+import useSWR from "swr"
+import Custom404Page from "../../../components/Custom404Page"
+import Loading from "../../../components/Loading"
 
 export default function Detail() {
 	const router = useRouter()

@@ -3,10 +3,10 @@ import NavigationItem from "../../../../components/NavigationItem"
 import RootLayout from "../../../../components/RootLayout"
 import ChallengeForm from "../../../../components/ChallengeForm"
 import fetchApi from "../../../../lib/FetchApi"
-import useSWR from "swr";
-import {useRouter} from "next/router";
-import Loading from "../../../../components/Loading";
-import Custom404Page from "../../../../components/Custom404Page";
+import useSWR from "swr"
+import {useRouter} from "next/router"
+import Loading from "../../../../components/Loading"
+import Custom404Page from "../../../../components/Custom404Page"
 
 export default function EditForm() {
 	const router = useRouter()
