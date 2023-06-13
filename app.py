@@ -11,7 +11,7 @@ from flask_cors import CORS, cross_origin
 dotenv.load_dotenv('.env')
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/predict": {"origins": "*"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 model_Bisindo = keras.models.load_model('model_Bisindo_FIX.h5')
 model_SIBI = keras.models.load_model('model_sibi_new.h5')
