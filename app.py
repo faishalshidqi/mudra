@@ -337,6 +337,7 @@ def hello():
 
 
 @app.route('/predict', methods=['POST'])
+@cross_origin()
 def predict():
     try:
         image = request.files['gambar']
