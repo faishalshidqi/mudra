@@ -82,7 +82,7 @@ class CourseManagersService {
 
 	async getAllManagedCoursesInfo() {
 
-		const result = await this._pool.query('select course_id, title, type from courses');
+		const result = await this._pool.query('select course_id, title, type from courses')
 		if (!result.rowCount) {
 			throw  new NotFoundError('Courses not found')
 		}

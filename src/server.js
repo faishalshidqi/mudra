@@ -17,7 +17,7 @@ const challenge_managers = require('./api/challenge_managers')
 const ChallengeManagersService = require('./services/postgres/ChallengeManagersService')
 const ChallengeManagersValidator = require('./validator/challenge_managers')
 
-const dashboard = require('./api/dashboard');
+const dashboard = require('./api/dashboard')
 const DashboardService = require('./services/postgres/DashboardService')
 
 const init = async () => {
@@ -73,29 +73,29 @@ const init = async () => {
 	])
 
 	server.ext('onPreResponse', (request, h) => {
-		const { response } = request;
+		const { response } = request
 		if (response instanceof Error) {
-			const {isServer, message, statusCode} = response;
+			const {isServer, message, statusCode} = response
 			if (response instanceof ClientError) {
 				const newResponse = h.response({
 					status: 'fail',
 					message: message,
-				});
-				newResponse.code(statusCode);
-				return newResponse;
+				})
+				newResponse.code(statusCode)
+				return newResponse
 			}
 			if (!isServer) {
-				return h.continue;
+				return h.continue
 			}
 			const newResponse = h.response({
 				status: 'error',
 				message: 'terjadi kegagalan pada server kami',
-			});
-			newResponse.code(500);
-			return newResponse;
+			})
+			newResponse.code(500)
+			return newResponse
 		}
-		return h.continue;
-	});
+		return h.continue
+	})
 
 	await server.start()
 	// eslint-disable-next-line no-console

@@ -14,6 +14,14 @@ Mudra is a hand sign learning platform that aims to help people communicate with
 - Ensure the cloned directory has a package.json file
 - Install the nodejs dependencies using this command
 <br>`npm install`
+- Insert environment variables in the .env file
+  Below a list of environment variables and their descriptions
+  - PORT: *port number to run the app*
+  - PGUSER: *database username*
+  - PGHOST: *database address*
+  - PGPASSWORD: *database password*
+  - PGDATABASE: *database name*
+  - PGPORT: *database port*
 - Use this command to start the development server
 <br>`npm run start-dev`
 - Use this command to start the production server
@@ -149,7 +157,7 @@ for example: /courses?type=SIBI
 ```
 # Manager API
 ## How to replicate
-- All commands are done in terminal
+- All commands are done **in terminal**
 - Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
   <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
 - Ensure you have nodejs installed on your machine. Use this command in terminal to ensure the nodejs installation. <br> `node -v`
@@ -470,7 +478,7 @@ Content-Type: application/json
 ```
 # Uploads Service API
 ## How to replicate
-- All commands are done in terminal
+- All commands are done **in terminal**
 - Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
   <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
 - Ensure you have nodejs installed on your machine. Use this command in terminal to ensure the nodejs installation. <br> `node -v`
@@ -480,6 +488,11 @@ Content-Type: application/json
 - Ensure the cloned directory has a package.json file
 - Install the nodejs dependencies using this command
   <br>`npm install`
+- Insert environment variables in the .env file
+  Below a list of environment variables and their descriptions
+  - PORT: *port number to run the app*
+  - API_URL: *course and challenge API url*
+  - BUCKET_NAME: *Cloud Storage bucket name*
 - Use this command to start the development server
   <br>`npm run start-dev`
 - Use this command to start the production server
@@ -521,7 +534,7 @@ Content-Type: multipart/form-data
 ```
 # Hand Sign ML Call
 ## How to replicate
-- All commands are done in terminal
+- All commands are done **in terminal**
 - Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
   <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
 - Ensure you have python installed on your machine. Use this command in terminal to ensure the python installation. <br> `python3 --version`
@@ -531,6 +544,9 @@ Content-Type: multipart/form-data
 - Ensure the cloned directory has a requirements.txt file
 - Install the python dependencies using this command
   <br>`pip3 install -r requirements.txt`
+- Insert environment variables in the .env file
+  Below a list of environment variables and their descriptions
+  - PORT: *port number to run the app*
 - Use this command to start the development server
   <br>`flask run --host 127.0.0.1 --port <insert available port>`
 - Use this command to start the production server
@@ -542,7 +558,7 @@ Content-Type: multipart/form-data
 ```json
 {
   "gambar": "image/* file",
-  "type": "text",
+  "type": "text"
 }
 ```
 #### Success Response (200 OK)
@@ -563,3 +579,28 @@ Content-Type: multipart/form-data
     ]
 }
 ```
+# Manager Panel
+## How to replicate
+- Commands are done **in terminal**
+- Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
+  <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
+- Ensure you have nodejs installed on your machine. Use this command in terminal to ensure the nodejs installation. <br> `node -v`
+  <br> If you haven't installed nodejs, please download it from [here](https://nodejs.org/en/download).
+- After git is installed, clone this repo using this command <br>
+  ```git clone -b manager-panel https://github.com/faishalshidqi/capstone-api```
+- Ensure the cloned directory has a package.json file
+- Install the nodejs dependencies using this command
+  <br>`npm install`
+- Insert environment variables in the .env file
+  Below a list of environment variables and their descriptions
+  - PORT: *port number to run the app*
+  - API_URL: *course and challenge API url*
+  - UPLOAD_URL: *uploads service API url*
+- Use this command to start the development server
+  <br>`npm run start-dev`
+- You have to build the project first to run production server. Use this command to build
+  <br>`npm run build`
+- If you encounter an error because of lint issues, run this command and try to build again after that
+  <br>`npm run lint`
+- Use this command to start the production server
+  <br>`npm run start`
