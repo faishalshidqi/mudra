@@ -521,7 +521,6 @@ Content-Type: multipart/form-data
 ```
 # Hand Sign ML Call
 ## How to replicate
-## How to replicate
 - All commands are done in terminal
 - Ensure you have git installed on your machine. Use this command in terminal to ensure the git installation. <br> `git --version`
   <br> If you haven't installed git, please follow the instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install git.
@@ -536,3 +535,31 @@ Content-Type: multipart/form-data
   <br>`flask run --host 127.0.0.1 --port <insert available port>`
 - Use this command to start the production server
   <br>`gunicorn --bind:<insert desired/available port> wsgi:app`
+## Endpoint
+- POST /upload
+#### Body Payload
+Content-Type: multipart/form-data
+```json
+{
+  "gambar": "image/* file",
+  "type": "text",
+}
+```
+#### Success Response (200 OK)
+```json
+{
+  "status": "text",
+  "response": [
+      {
+        "Huruf": "text",
+        "label_id": "text",
+        "probability": "text"
+      },
+      {
+        "Huruf": "text",
+        "label_id": "text",
+        "probability": "text"
+      }
+    ]
+}
+```
