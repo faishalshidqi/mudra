@@ -1,4 +1,4 @@
-## Simple Flask Server for Model Classification Model
+## Simple Flask Server for Classification Model
 The model used in this repository is from [here](https://colab.research.google.com/drive/1T_FR0YhdIb1WkwrxtV49_KB5JKXfxh91?usp=sharing)
 
 ### Install required libraries
