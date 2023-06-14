@@ -1,5 +1,5 @@
 ## Simple Flask Server for Model Classification Model
-The model used in this repository is from [here](https://colab.research.google.com/github/https-deeplearning-ai/tensorflow-1-public/blob/master/C1/W2/ungraded_labs/C1_W2_Lab_1_beyond_hello_world.ipynb#scrollTo=6EN_OaovDjK5)
+The model used in this repository is from [here](https://colab.research.google.com/drive/1T_FR0YhdIb1WkwrxtV49_KB5JKXfxh91?usp=sharing)
 
 ### Install required libraries
 `pip3 install -r requirements.txt`
