@@ -1,4 +1,4 @@
-## Simple Flask Server for MNIST Fashion Classification Model
+## Simple Flask Server for Model Classification Model
 The model used in this repository is from [here](https://colab.research.google.com/github/https-deeplearning-ai/tensorflow-1-public/blob/master/C1/W2/ungraded_labs/C1_W2_Lab_1_beyond_hello_world.ipynb#scrollTo=6EN_OaovDjK5)
 
 ### Install required libraries
