@@ -552,7 +552,7 @@ Content-Type: multipart/form-data
 - Use this command to start the production server
   <br>`gunicorn --bind:<insert desired/available port> wsgi:app`
 ## Endpoint
-- POST /upload
+- POST /predict
 #### Body Payload
 Content-Type: multipart/form-data
 ```json
