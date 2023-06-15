@@ -5,16 +5,24 @@ import DashboardItem from "../components/DashboardItem"
 import RootLayout from "../components/RootLayout"
 import FetchApi from "../lib/FetchApi"
 import Link from "next/link"
+import useSWR from "swr";
+import Loading from "../components/Loading";
+import Custom404Page from "../components/Custom404Page";
 
-export async function getStaticProps() {
-	const dashboardData = await FetchApi.getDashboard()
-	return {
-		props: {
-			dashboardData
-		}
+export default function Home() {
+	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/dashboard`, FetchApi.getDashboard)
+	if (isLoading) {
+		return (
+			<Loading />
+		)
 	}
-}
-export default function Home({ dashboardData }) {
+
+	if (!data && error) {
+		return (
+			<Custom404Page message="Dashboard data not found" />
+		)
+	}
+	const {challenges_total, courses_total} = data
 	return (
 		<RootLayout>
 			<Navigation>
@@ -36,7 +44,7 @@ export default function Home({ dashboardData }) {
 							</div>
 							<div>
 								<dt className="sr-only">Info</dt>
-								<dd className="group-hover:text-blue-700">{dashboardData.challenges_total} challenges are live</dd>
+								<dd className="group-hover:text-blue-700">{challenges_total} challenges are live</dd>
 							</div>
 						</dl>
 					</Link>
@@ -52,7 +60,7 @@ export default function Home({ dashboardData }) {
 							</div>
 							<div>
 								<dt className="sr-only">Info</dt>
-								<dd className="group-hover:text-blue-700">{dashboardData.courses_total} courses are live</dd>
+								<dd className="group-hover:text-blue-700">{courses_total} courses are live</dd>
 							</div>
 						</dl>
 					</Link>
