@@ -9,10 +9,9 @@ class CoursesService {
 
 	async getCourses() {
 		const query = {
-			text: 'select * from courses where is_deleted = false'
+			text: 'select * from courses where is_deleted = false order by type, title'
 		}
 		const result = await this._pool.query(query)
-
 		if (!result.rowCount) {
 			throw new NotFoundError('Courses tidak ditemukan')
 		}
@@ -34,7 +33,7 @@ class CoursesService {
 
 	async getCoursesByType(type) {
 		const query = {
-			text: 'select * from courses where type = $1 and is_deleted = false',
+			text: 'select * from courses where type = $1 and is_deleted = false order by title',
 			values: [type]
 		}
 		const result = await this._pool.query(query)
