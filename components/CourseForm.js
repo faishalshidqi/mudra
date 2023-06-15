@@ -74,8 +74,7 @@ export default function CourseForm({courseData}) {
 		}
 
 		formData.append(e.target.name, e.target.files[0])
-		const filename = encodeURI(`${data.title}_${data.type}`)
-		console.log(data.type)
+		const filename = `${data.title}_${data.type}`
 		formData.append("filename", filename)
 		setFilename(formData.get(e.target.name).name)
 		setFile(formData)
