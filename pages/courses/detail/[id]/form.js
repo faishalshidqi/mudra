@@ -4,9 +4,9 @@ import RootLayout from "../../../../components/RootLayout"
 import CourseForm from "../../../../components/CourseForm"
 import fetchApi from "../../../../lib/FetchApi"
 import {useRouter} from "next/router"
-import useSWR from "swr";
-import Loading from "../../../../components/Loading";
-import Custom404Page from "../../../../components/Custom404Page";
+import useSWR from "swr"
+import Loading from "../../../../components/Loading"
+import Custom404Page from "../../../../components/Custom404Page"
 export default function EditForm() {
 	const router = useRouter()
 	const {id} = router.query

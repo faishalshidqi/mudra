@@ -5,8 +5,8 @@ import NavigationItem from "../../../components/NavigationItem"
 import RootLayout from "../../../components/RootLayout"
 import DetailCourse from "../../../components/DetailCourse"
 import useSWR from "swr"
-import Loading from "../../../components/Loading";
-import Custom404Page from "../../../components/Custom404Page";
+import Loading from "../../../components/Loading"
+import Custom404Page from "../../../components/Custom404Page"
 
 export default function Detail() {
 	const router = useRouter()
