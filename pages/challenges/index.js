@@ -27,6 +27,7 @@ export default function CoursesList() {
 			<Navigation>
 				<NavigationItem href='/'>Dashboard</NavigationItem>
 				<NavigationItem href='/courses'>Courses</NavigationItem>
+				<NavigationItem href='/courses/form'>Add New Course</NavigationItem>
 				<NavigationItem href='/challenges' isActive>Challenges</NavigationItem>
 				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
