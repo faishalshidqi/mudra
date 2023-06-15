@@ -159,8 +159,8 @@ export default function ChallengeForm({ challengeData, courses }) {
 								>
 									<option value='Default' disabled>Choose Course</option>
 									{
-										courses.map(({course_id, title}) => (
-											<option key={course_id} value={course_id}>{title}</option>
+										courses.map(({course_id, title, type}) => (
+											<option key={course_id} value={course_id}>{title} - {type}</option>
 										))
 									}
 								</select>
