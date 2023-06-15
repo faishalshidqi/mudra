@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/home_solid"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_course"
+        android:icon="@drawable/course_solid"
+        android:title="@string/title_course" />
+
+    <item
+        android:id="@+id/navigation_challenge"
+        android:icon="@drawable/challenge_solid"
+        android:title="@string/title_challenge" />
+
+</menu>

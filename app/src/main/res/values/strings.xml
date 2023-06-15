@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">MUDRA</string>
+
+    <!--Navigation-->
+    <string name="title_home">Home</string>
+    <string name="title_course">Courses</string>
+    <string name="title_challenge">Challenges</string>
+
+    <!--Home-->
+    <string name="welcome_mudra">Selamat Datang \nM U D R A !</string>
+    <string name="desc_mudra">Mari mulai belajar bahasa isyarat</string>
+    <!--List Menu-->
+    <string name="title_menu_course">Belajar di sini !</string>
+    <string name="title_menu_challenge">Ambil tantangan ini !</string>
+
+    <!--Course-->
+    <string name="course">Kursus</string>
+    <string name="text_field_search">Cari huruf favorit kamu</string>
+    <string name="description_courses">Langkah-langkah membuat huruf :</string>
+    <string name="type_hint">Isi jenis bahasa sesuai dengan di soal</string>
+    <string name="title_sibi">Belajar bahasa isyarat SIBI</string>
+    <string name="title_bisindo">Belajar bahasa isyarat BISINDO</string>
+    <string name="title_asl">Belajar bahasa isyarat ASL</string>
+
+    <!--Challenge-->
+    <string name="challenge_title">Unggah gambar dibawah</string>
+    <string name="challenge_desc">Klik icon camera untuk unggah gambar</string>
+    <string name="challenge_ask">Bagaimana bentuk %1$s ?</string>
+    <string name="upload_image">Unggah Gambar</string>
+    <string name="camera">Kamera</string>
+
+    <!--Kamera-->
+    <string name="failed_picture">Gagal mengambil gambar</string>
+</resources>
