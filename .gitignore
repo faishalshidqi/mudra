@@ -5,6 +5,7 @@ coverage
 _test/
 *test.js
 test/
+keys/
 mudra-dev-385811-bc3283cd8434.json
 .idea
 !test/GenerateDummyData.js

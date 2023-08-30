@@ -20,11 +20,16 @@ const ChallengeManagersValidator = require('./validator/challenge_managers')
 const dashboard = require('./api/dashboard')
 const DashboardService = require('./services/postgres/DashboardService')
 
+const uploads = require('./api/uploads')
+const StorageService = require('./services/gcs/ImageUploadService')
+const UploadsValidator = require('./validator/uploads')
+
 const init = async () => {
 	const coursesService = new CoursesService()
 	const challengesService = new ChallengesService()
 	const courseManagersService = new CourseManagersService()
 	const challengeManagersService = new ChallengeManagersService()
+	const storageService = new StorageService()
 	const dashboardService = new DashboardService()
 
 	const server = Hapi.server({
@@ -65,6 +70,13 @@ const init = async () => {
 			}
 		},
 		{
+			plugin: uploads,
+			options: {
+				storageService,
+				validator: UploadsValidator
+			}
+		},
+		{
 			plugin: dashboard,
 			options: {
 				service: dashboardService
@@ -74,6 +86,7 @@ const init = async () => {
 
 	server.ext('onPreResponse', (request, h) => {
 		const { response } = request
+		//console.log(response)
 		if (response instanceof Error) {
 			const {isServer, message, statusCode} = response
 			if (response instanceof ClientError) {
@@ -89,7 +102,7 @@ const init = async () => {
 			}
 			const newResponse = h.response({
 				status: 'error',
-				message: 'terjadi kegagalan pada server kami',
+				message: 'An error occurred at our server',
 			})
 			newResponse.code(500)
 			return newResponse
