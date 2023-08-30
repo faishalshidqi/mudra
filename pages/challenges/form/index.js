@@ -6,9 +6,32 @@ import useSWR from "swr"
 import fetchApi from "../../../lib/FetchApi"
 import Custom404Page from "../../../components/Custom404Page"
 import Loading from "../../../components/Loading"
-export default function Form() {
-	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/courses/info`, fetchApi.getCoursesInfo)
-	if (isLoading) {
+import {useState} from "react";
+import loginAuth from "../../../utils/loginAuth";
+const Form = (isAuthenticated) => {
+	const [loadingToken, setLoadingToken] = useState(true)
+
+	const { data: dataToken, error: errorToken } = useSWR(
+		`${process.env.API_URL}/kll/authentications`,
+		fetchApi.getAccessToken,
+		{
+			shouldRetryOnError: false,
+			revalidateOnMount: true,
+			onSuccess: () => {
+				setLoadingToken(false);
+			},
+			onError: () => {
+				setLoadingToken(false);
+			},
+		}
+	);
+	if (!dataToken && errorToken) {
+		return (
+			<Custom404Page message="Can't found any Courses data" />
+		)
+	}
+	const {data, error, isLoading} = useSWR(() => (dataToken?.accessToken ? dataToken?.accessToken : ''), fetchApi.getCoursesInfo)
+	if (loadingToken || !isAuthenticated || isLoading) {
 		return (
 			<Loading />
 		)
@@ -32,3 +55,5 @@ export default function Form() {
 		</RootLayout>
 	)
 }
+
+export default loginAuth(Form)

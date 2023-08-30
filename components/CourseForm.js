@@ -97,7 +97,7 @@ export default function CourseForm({courseData}) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-
+		const {accessToken} = await fetchApi.getAccessToken()
 		if (courseData) {
 			const request = {
 				body: {
@@ -111,7 +111,7 @@ export default function CourseForm({courseData}) {
 			if (isFileUploadHandlerInvoked) {
 				request.body.sign_pict_link = await handleUpload(e)
 			}
-			await fetchApi.editCourseById(courseData["course_id"], request)
+			await fetchApi.editCourseById(courseData["course_id"], request, accessToken)
 				.then(() => {
 					return MySwal.fire({
 						title: "Success",
@@ -141,7 +141,7 @@ export default function CourseForm({courseData}) {
 				is_deleted: !(Number(selectedRadioOption)),
 			}
 		}
-		await fetchApi.addNewCourse(request)
+		await fetchApi.addNewCourse(request, accessToken)
 			.then(({course_id}) => {
 				return MySwal.fire({
 					title: "Success",

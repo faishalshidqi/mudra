@@ -8,10 +8,35 @@ import Link from "next/link"
 import useSWR from "swr";
 import Loading from "../components/Loading";
 import Custom404Page from "../components/Custom404Page";
+import {useState} from "react";
+import fetchApi from "../lib/FetchApi";
+import loginAuth from "../utils/loginAuth";
 
-export default function Home() {
-	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/dashboard`, FetchApi.getDashboard)
-	if (isLoading) {
+const Home = ({ isAuthenticated }) => {
+	const [loadingToken, setLoadingToken] = useState(true)
+
+	const { data: dataToken, error: errorToken } = useSWR(
+		`${process.env.API_URL}/kll/authentications`,
+		fetchApi.getAccessToken,
+		{
+			shouldRetryOnError: false,
+			revalidateOnMount: true,
+			onSuccess: () => {
+				setLoadingToken(false);
+			},
+			onError: () => {
+				setLoadingToken(false);
+			},
+		}
+	);
+	console.log(dataToken)
+	if (!dataToken && errorToken) {
+		return (
+			<Custom404Page message="Dashboard data not found" />
+		)
+	}
+	const {data, error, isLoading} = useSWR(() => (dataToken?.accessToken ? dataToken?.accessToken : ''), FetchApi.getDashboard)
+	if (loadingToken || !isAuthenticated || isLoading) {
 		return (
 			<Loading />
 		)
@@ -69,3 +94,5 @@ export default function Home() {
 		</RootLayout>
 	)
 }
+
+export default loginAuth(Home)

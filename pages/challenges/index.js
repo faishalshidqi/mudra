@@ -7,11 +7,33 @@ import fetchApi from "../../lib/FetchApi"
 import useSWR from "swr"
 import Custom404Page from "../../components/Custom404Page"
 import Loading from "../../components/Loading"
+import {useState} from "react";
+import loginAuth from "../../utils/loginAuth";
 
-export default function CoursesList() {
-	const {data, error, isLoading} = useSWR(`${process.env.API_URL}/kll/challenges`, fetchApi.getAllChallenges)
+const ChallengesList = (isAuthenticated) => {
+	const [loadingToken, setLoadingToken] = useState(true)
 
-	if (isLoading) {
+	const { data: dataToken, error: errorToken } = useSWR(
+		`${process.env.API_URL}/kll/authentications`,
+		fetchApi.getAccessToken,
+		{
+			shouldRetryOnError: false,
+			revalidateOnMount: true,
+			onSuccess: () => {
+				setLoadingToken(false);
+			},
+			onError: () => {
+				setLoadingToken(false);
+			},
+		}
+	);
+	if (!dataToken && errorToken) {
+		return (
+			<Custom404Page message="Can't found any Courses data" />
+		)
+	}
+	const { data, error, isLoading } = useSWR(() => (dataToken?.accessToken ? dataToken?.accessToken : ''), fetchApi.getAllChallenges)
+	if (loadingToken || !isAuthenticated || isLoading) {
 		return (
 			<Loading />
 		)
@@ -21,7 +43,6 @@ export default function CoursesList() {
 			<Custom404Page message="Can't found any Courses data" />
 		)
 	}
-	const {challenges} = data
 	return (
 		<RootLayout>
 			<Navigation>
@@ -32,7 +53,7 @@ export default function CoursesList() {
 				<NavigationItem href='/challenges/form'>Add New Challenge</NavigationItem>
 			</Navigation>
 			<List>
-				{challenges.map((challenge) => (
+				{data?.challenges.map((challenge) => (
 					<ListItem key={challenge["challenge_id"]} context={challenge}/>
 				))}
 			</List>
@@ -40,3 +61,5 @@ export default function CoursesList() {
 		</RootLayout>
 	)
 }
+
+export default loginAuth(ChallengesList)
