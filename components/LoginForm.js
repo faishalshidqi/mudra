@@ -1,6 +1,6 @@
 import {useState} from "react";
 import fetchApi from "../lib/FetchApi";
-import LocalStorage from "../lib/LocalStorage";
+import CookieHandler from "../lib/CookieHandler";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {useRouter} from "next/router";
@@ -27,28 +27,29 @@ export default function LoginForm(message) {
             ...data
         }
 
-        // const {refreshToken} = await fetchApi.userLogin(request)
-        // if (!refreshToken) {
-        //     await MySwal.fire({
-        //         title: 'Username or Password not valid',
-        //         icon: 'error'
-        //     })
-        //         .then(() => {
-        //             setData({
-        //                 ...data,
-        //                 password: ''})
-        //         })
-        //     return
-        // }
-        // LocalStorage.addToken(refreshToken)
-        void router.push('https://manager-panel-3vqqmj4ryq-et.a.run.app')
+        const {refreshToken} = await fetchApi.userLogin(request)
+        if (!refreshToken) {
+            await MySwal.fire({
+                title: 'Username or Password not valid',
+                icon: 'error'
+            })
+                .then(() => {
+                    setData({
+                        ...data,
+                        password: ''})
+                })
+            return
+        }
+        CookieHandler.addToken(refreshToken)
+        void router.replace('/')
+        // void router.push('https://manager-panel-3vqqmj4ryq-et.a.run.app')
     }
     return (
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
                         className="mx-auto h-20 w-auto"
-                        src="./logo2.png"
+                        src="./mudra-logo-round-short.png"
                         alt="Mudra App"
                     />
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">

@@ -69,7 +69,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-
+		const {accessToken} = await fetchApi.getAccessToken()
 		const request = {
 			body: {
 				title: data.title,
@@ -81,7 +81,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 			}
 		}
 		if (challengeData) {
-			await fetchApi.editChallengeById(challengeData["challenge_id"], request)
+			await fetchApi.editChallengeById(challengeData["challenge_id"], request, accessToken)
 				.then(() => {
 					return MySwal.fire({
 						title: "Success",
@@ -100,7 +100,7 @@ export default function ChallengeForm({ challengeData, courses }) {
 				})
 			return
 		}
-		await FetchApi.addNewChallenge(request)
+		await FetchApi.addNewChallenge(request, accessToken)
 			.then(({challenge_id}) => {
 				return MySwal.fire({
 					title: "Success",

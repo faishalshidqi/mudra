@@ -7,10 +7,32 @@ import fetchApi from "../../lib/FetchApi"
 import useSWR from "swr"
 import Custom404Page from "../../components/Custom404Page"
 import Loading from "../../components/Loading"
-export default function CoursesList() {
-	const { data, error, isLoading } = useSWR(`${process.env.API_URL}/kll/courses`, fetchApi.getAllCourses)
+import  loginAuth from "../../utils/loginAuth"
+import {useState} from "react";
+const CoursesList = ({isAuthenticated}) =>  {
+	const [loadingToken, setLoadingToken] = useState(true)
 
-	if (isLoading) {
+	const { data: dataToken, error: errorToken } = useSWR(
+		`${process.env.API_URL}/kll/authentications`,
+		fetchApi.getAccessToken,
+		{
+			shouldRetryOnError: false,
+			revalidateOnMount: true,
+			onSuccess: () => {
+				setLoadingToken(false);
+			},
+			onError: () => {
+				setLoadingToken(false);
+			},
+		}
+	);
+	if (!dataToken && errorToken) {
+		return (
+			<Custom404Page message="Can't found any Courses data" />
+		)
+	}
+	const { data, error, isLoading } = useSWR(() => (dataToken?.accessToken ? dataToken?.accessToken : ''), fetchApi.getAllCourses)
+	if (loadingToken || !isAuthenticated || isLoading) {
 		return (
 			<Loading />
 		)
@@ -37,3 +59,5 @@ export default function CoursesList() {
 		</Layout>
 	)
 }
+
+export  default loginAuth(CoursesList);

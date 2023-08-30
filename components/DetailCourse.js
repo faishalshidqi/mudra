@@ -25,7 +25,8 @@ export default function DetailCourse({ courseData: {course_id: id, created_at, d
 			text: "This course will be delete permanently"
 		}).then(async (result) => {
 			if (result.isConfirmed) {
-				await fetchApi.deleteCourse(id)
+				const {accessToken} = await fetchApi.getAccessToken()
+				await fetchApi.deleteCourse(id, accessToken)
 					.then(() => {
 						return MySwal.fire({
 							title: "Success",

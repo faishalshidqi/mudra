@@ -24,7 +24,8 @@ export default function DetailChallenge({ challengeData: {challenge_id: id, crea
 			text: "This challenge will be delete permanently"
 		}).then(async (result) => {
 			if (result.isConfirmed) {
-				await fetchApi.deleteChallenge(id)
+				const {accessToken} = await fetchApi.getAccessToken()
+				await fetchApi.deleteChallenge(id,accessToken)
 					.then(() => {
 						return MySwal.fire({
 							title: "Success",

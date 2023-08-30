@@ -1,21 +1,27 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Loading from '../components/Loading';
+import CookieHandler from '../lib/CookieHandler';
 
-export default function withAuth(WrappedComponent) {
-    const Wrapper = (props) => {
+function loginAuth(WrappedComponent) {
+    return (props) => {
+        const isAuthenticated = CookieHandler.getToken();
         const router = useRouter();
 
         useEffect(() => {
-            // Check if user is logged in (you'll need to implement your own logic here)
-            const isLoggedIn = checkIfUserIsLoggedIn();
-
-            if (!isLoggedIn) {
-                router.push('/login');
+            // Redirect to login page if not authenticated
+            if (!isAuthenticated) {
+                router.replace('/login');
             }
-        }, []);
+        }, [isAuthenticated, router]);
 
-        return <WrappedComponent {...props} />;
+        if (!isAuthenticated) {
+            return <Loading />; // or any other loading state/component
+        }
+
+        // Render the wrapped component if authenticated
+        return <WrappedComponent isAuthenticated={isAuthenticated} {...props} />;
     };
+}
 
-    return Wrapper;
-};
+export default loginAuth;
