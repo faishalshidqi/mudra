@@ -9,7 +9,6 @@ class UploadsHandler {
 
 		this._validator.validateImageHeaders(file.hapi.headers)
 		const url = await this._storageService.uploadFile(file, foldername, filename)
-		console.log(url)
 		const response = h.response({
 			status: 'success',
 			message: 'Successfully uploaded the file',

@@ -18,7 +18,7 @@ const routes = (handler) => [
 	{
 		method: 'GET',
 		path: '/kll/courses/info',
-		handler: () => handler.getManagedCoursesInfoHandler(),
+		handler: (request) => handler.getManagedCoursesInfoHandler(request),
 		options: {
 			auth: 'mudra_jwt',
 		},

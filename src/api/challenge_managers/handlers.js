@@ -1,10 +1,13 @@
 class ChallengeManagersHandler {
-	constructor(service, validator) {
+	constructor(service, usersService, validator) {
 		this._service = service
+		this._usersService = usersService
 		this._validator = validator
 	}
 
 	async postManagedChallengeHandler(request, h){
+		const {id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(id)
 		this._validator.validateChallengeManagerPayload(request.payload)
 		const {challenge_id} = await this._service.addManagedChallenge(request.payload)
 
@@ -21,6 +24,9 @@ class ChallengeManagersHandler {
 	}
 
 	async getManagedChallengesHandler(request) {
+		const {id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(id)
+
 		const {type} = request.query
 		if (!type) {
 			const challenges = await this._service.getManagedChallenges()
@@ -42,6 +48,9 @@ class ChallengeManagersHandler {
 	}
 
 	async getManagedChallengeByIdHandler(request) {
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
+
 		const {id} = request.params
 		const challenge = await this._service.getManagedChallengeById(id)
 		return {
@@ -53,6 +62,9 @@ class ChallengeManagersHandler {
 	}
 
 	async editManagedChallengeByIdHandler(request) {
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
+
 		this._validator.validateChallengeManagerPayload(request.payload)
 		const {id} = request.params
 
@@ -65,6 +77,9 @@ class ChallengeManagersHandler {
 	}
 
 	async deleteManagedChallengeByIdHandler(request) {
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
+
 		const {id} = request.params
 		await this._service.deleteManagedChallengeById(id)
 		return {

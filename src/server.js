@@ -20,16 +20,16 @@ const ChallengeManagersValidator = require('./validator/challenge_managers')
 const dashboard = require('./api/dashboard')
 const DashboardService = require('./services/postgres/DashboardService')
 
-const users = require('./api/users');
-const UsersService = require('./services/postgres/UsersService');
-const UsersValidator = require('./validator/users');
+const users = require('./api/users')
+const UsersService = require('./services/postgres/UsersService')
+const UsersValidator = require('./validator/users')
 
-const authentications = require('./api/authentications');
-const AuthenticationsValidator = require('./validator/authentications');
-const AuthenticationsService = require('./services/postgres/AuthenticationsService');
+const authentications = require('./api/authentications')
+const AuthenticationsValidator = require('./validator/authentications')
+const AuthenticationsService = require('./services/postgres/AuthenticationsService')
 
-const TokenManager = require('./tokenize/TokenManager');
-const Jwt = require("@hapi/jwt");
+const TokenManager = require('./tokenize/TokenManager')
+const Jwt = require('@hapi/jwt')
 
 const uploads = require('./api/uploads')
 const StorageService = require('./services/gcs/ImageUploadService')
@@ -42,8 +42,8 @@ const init = async () => {
 	const challengeManagersService = new ChallengeManagersService()
 	const storageService = new StorageService()
 	const dashboardService = new DashboardService()
-	const usersService = new UsersService();
-	const authenticationsService = new AuthenticationsService();
+	const usersService = new UsersService()
+	const authenticationsService = new AuthenticationsService()
 
 	const server = Hapi.server({
 		port: process.env.PORT,
@@ -55,11 +55,11 @@ const init = async () => {
 		}
 	})
 
-	await server.register(
+	await server.register([
 		{
 			plugin: Jwt
 		}
-	)
+	])
 
 	server.auth.strategy('mudra_jwt', 'jwt', {
 		keys: process.env.ACCESS_TOKEN_KEY,
@@ -74,8 +74,9 @@ const init = async () => {
 			credentials: {
 				id: artifacts.decoded.payload.id,
 			},
+			alg: artifacts.decoded.header
 		}),
-	});
+	})
 
 	await server.register([
 		{
@@ -88,6 +89,7 @@ const init = async () => {
 			plugin: course_managers,
 			options: {
 				service: courseManagersService,
+				usersService,
 				validator: CourseManagersValidator
 			}
 		},
@@ -101,6 +103,7 @@ const init = async () => {
 			plugin: challenge_managers,
 			options: {
 				service: challengeManagersService,
+				usersService,
 				validator: ChallengeManagersValidator
 			}
 		},
@@ -153,7 +156,8 @@ const init = async () => {
 			}
 			const newResponse = h.response({
 				status: 'error',
-				message: 'An error occurred at our server',
+				//message: 'An error occurred at our server',
+				message
 			})
 			newResponse.code(500)
 			return newResponse

@@ -9,7 +9,7 @@ class CourseManagersService {
 	}
 
 	async addManagedCourse({title, sign_pict_link, description, type, is_deleted}){
-		const id = nanoid(16)
+		const id = `course-${nanoid(16)}`
 		const created_at = new Date().toISOString()
 		const updated_at = created_at
 

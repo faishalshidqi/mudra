@@ -1,10 +1,13 @@
 class CourseManagersHandler {
-	constructor(service, validator) {
+	constructor(service, usersService, validator) {
 		this._service = service
+		this._usersService = usersService
 		this._validator = validator
 	}
 
 	async postManagedCourseHandler(request, h){
+		const {id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(id)
 		this._validator.validateCourseManagerPayload(request.payload)
 		const {course_id} = await this._service.addManagedCourse(request.payload)
 		const response = h.response({
@@ -19,6 +22,9 @@ class CourseManagersHandler {
 	}
 
 	async getManagedCoursesHandler(request){
+		const {id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(id)
+
 		const {type} = request.query
 		if (!type) {
 			const courses = await this._service.getManagedCourses()
@@ -37,10 +43,11 @@ class CourseManagersHandler {
 				courses
 			}
 		}
-
 	}
 
-	async getManagedCoursesInfoHandler(){
+	async getManagedCoursesInfoHandler(request){
+		const {id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(id)
 		const courses = await this._service.getAllManagedCoursesInfo()
 		return {
 			status: 'success',
@@ -51,6 +58,8 @@ class CourseManagersHandler {
 	}
 
 	async getManagedCourseByIdHandler(request){
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
 		const {id} = request.params
 		const course = await this._service.getManagedCourseById(id)
 		return {
@@ -63,6 +72,8 @@ class CourseManagersHandler {
 	}
 
 	async editManagedCourseByIdHandler(request) {
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
 		this._validator.validateCourseManagerPayload(request.payload)
 		const {id} = request.params
 
@@ -75,6 +86,8 @@ class CourseManagersHandler {
 	}
 
 	async deleteManagedCourseByIdHandler(request){
+		const {id: user_id} = request.auth.credentials
+		await this._usersService.verifyAdminRole(user_id)
 		const {id} = request.params
 
 		await this._service.deleteManagedCourseById(id)

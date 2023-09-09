@@ -1,9 +1,9 @@
 const routes = (handler) => [
-  {
-    method: 'POST',
-    path: '/kll/users',
-    handler: (request, h) => handler.postUserHandler(request, h),
-  },
-];
+	{
+		method: 'POST',
+		path: '/users',
+		handler: (request, h) => handler.postAdminUserHandler(request, h),
+	}
+]
 
-module.exports = routes;
+module.exports = routes
